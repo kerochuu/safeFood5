@@ -12,12 +12,12 @@
 
  2. 상품 관련 기능
   - 상품명 / 제조사 / 알러지 / 원재료 별 검색
-    <img src="ScreenShot/seaching.PNG">
-    <img src="ScreenShot/seachingDetail.PNG">
+    <img src="ScreenShot/Main.PNG">
+    <img src="ScreenShot/List.PNG">
 
   - 음식별 영양정보 및 영양 구성 조회
-    <img src="ScreenShot/detailView.PNG">
-    <img src="ScreenShot/nutritionList.jpg">
+  - 음식별 알러지 유발 요소 알림
+    <img src="ScreenShot/Detail.PNG">
  
   - 음식별 알러지 유발 요소 알림
  
