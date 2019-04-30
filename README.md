@@ -19,8 +19,6 @@
   - 음식별 알러지 유발 요소 알림
     <img src="ScreenShot/Detail.PNG">
  
-  - 음식별 알러지 유발 요소 알림
- 
   - 마이페이지를 통한 개인 정보 조회
     <img src="ScreenShot/Info.PNG">
 
