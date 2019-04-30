@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<head>
+    <title>SafeFoodForYou</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./asset/css/bootstrap.min.css">
+    <script type="text/javascript" src="./asset/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./asset/js/bootstrap-4.1.0.min.js"></script>
+    <script src="./asset/js/Chart.bundle.min.js"></script>
+    <script src="./asset/js/utils.js"></script>
+    <script type="text/javascript" src="./asset/js/localStorage.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="./Main.html" class="navbar-brand"><span class="safe-text">Safe</span>FoodForYou</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#">공지사항</a>
+                <a class="nav-item nav-link" href="#">상품정보</a>
+                <a class="nav-item nav-link" href="#">베스트 섭취 정보</a>
+                <a class="nav-item nav-link" href="#">내 섭취 정보</a>
+                <a class="nav-link" href="#">로그인</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <h2 class="tilte-sub">제품정보</h2>
+    <hr>
+    <div id="productInfo" class="contents">
+        <!-- item -->
+    </div>
+    <h2 class="title-sub">영양정보</h2>
+    <hr>
+    <div class="contents">
+        <div class="nutrition-info">
+            <div class="info-block">
+                <canvas id="chart-area" width="400" height="400" class="chartjs-render-monitor" style="display: block; width: 372px; height: 186px;"></canvas>
+            </div>
+            <div class="info-block">
+                <table class="table">
+                    <tr>
+                        <th>일일 제공량</th>
+                        <td>200.00</td>
+                    </tr>
+                    <tr>
+                        <th>칼로리</th>
+                        <td>58.33</td>
+                    </tr>
+                    <tr>
+                        <th>탄수화물</th>
+                        <td>214</td>
+                    </tr>
+                    <tr>
+                        <th>단백질</th>
+                        <td>435</td>
+                    </tr>
+                    <tr>
+                        <th>지방</th>
+                        <td>234</td>
+                    </tr>
+                    <tr>
+                        <th>당류</th>
+                        <td>67</td>
+                    </tr>
+                    <tr>
+                        <th>나트륨</th>
+                        <td>2345</td>
+                    </tr>
+                    <tr>
+                        <th>콜레스테롤</th>
+                        <td>124</td>
+                    </tr>
+                    <tr>
+                        <th>포화지방산</th>
+                        <td>346</td>
+                    </tr>
+                    <tr>
+                        <th>트렌스지방</th>
+                        <td>213</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <hr/>
+    <h4>Contacts</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>서울특별시 강남구 언주로 508 7층 701호(역삼동, 서울상록빌딩)</p>
+            <p>Team 16 & 23</p>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <p class="text-muted text-right">Copyright for SSAFY all rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+<style>
+    body {
+        margin: 0;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    a:link,a:visited,a:active,a:hover {
+        text-decoration:none;
+        color: black;
+    }
+    main {
+        margin: 10% 20%;
+    }
+    .safe-text {
+        color:rgb(22, 160, 133);
+    }
+    .contents {
+        margin: 3% 0;
+    }
+    footer {
+        margin: 0 20%;
+    }
+    .product-info, .nutrition-info {
+        margin: 0 10%;
+    }
+    .info-block {
+        display: inline-block;
+        vertical-align: top;
+        margin: 2%;
+    }
+    .label-allergy{
+        color: white;
+        padding: 5px;
+        background-color: red;
+        border-radius: 12px;
+        margin: 3px;
+    }
+    #ingredient{
+        width: 400px;
+    }
+    img{
+        padding: 10%;
+        height: 400px;
+        width: 400px;
+    }
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    th{
+        width: 300px;
+    }
+
+</style>
+<script>
+    var foodList = JSON.parse(getData("foodList"));
+    var nutritionList = JSON.parse(getData("nutritionList"));
+    var targetNum = getData("num") - 1;
+    var allergys = ["대두","땅콩","우유","게","새우","참치","연어","쑥","소고기","닭고기","돼지고기","복숭아","민들레","계란흰자"];
+
+    $(function(){
+        view();
+        viewTable();
+    });
+
+    function view() {
+        $("#productInfo").empty();
+        var html = '<div class="product-info"><div class="info-block">'
+            + '<img src="./asset/'
+            + foodList[targetNum].image
+            + '"></div><div class="info-block"><div class="product-title">'
+            + '<h3 id="name">'
+            + foodList[targetNum].name
+            + '</h3><p id="company">'
+            + foodList[targetNum].maker
+            + '</p></div><div class="product-ingredient"><p id="ingredient">'
+            + foodList[targetNum].material
+            + '</p></div><div id="allergy">'
+        for(var allergy in allergys){
+            if(foodList[targetNum].material.includes(allergys[allergy])){
+                html += '<label class="label label-allergy">' + allergys[allergy] + '</label>'
+            }
+        }
+            html += '</div></div></div>'
+
+        console.log(html);
+        $("#productInfo").append(html);
+    }
+
+    function viewTable() {
+        $(".table").empty();
+        var html =    '<tr><th>일일 제공량</th>'
+                    + '<td>' + nutritionList[targetNum].SERVING_WT + '</td></tr>'
+                    + '<tr><th>칼로리</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT1 + '</td></tr>'
+                    + '<tr><th>탄수화물</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT2 + '</td></tr>'
+                    + '<tr><th>단백질</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT3 + '</td></tr>'
+                    + '<tr><th>지방</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT4 + '</td></tr>'
+                    + '<tr><th>당류</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT5 + '</td></tr>'
+                    + '<tr><th>나트륨</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT6 + '</td></tr>'
+                    + '<tr><th>콜레스테롤</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT7 + '</td></tr>'
+                    + '<tr><th>포화지방산</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT8 + '</td></tr>'
+                    + '<tr><th>트렌스지방</th>'
+                    + '<td>' + nutritionList[targetNum].NUTR_CONT9 + '</td></tr>'
+        console.log(html);
+        $(".table").append(html);
+    }
+
+</script>
+<script>
+    var config = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [
+                    nutritionList[targetNum].NUTR_CONT1,
+                    nutritionList[targetNum].NUTR_CONT2,
+                    nutritionList[targetNum].NUTR_CONT3,
+                    nutritionList[targetNum].NUTR_CONT4,
+                    nutritionList[targetNum].NUTR_CONT5,
+                    nutritionList[targetNum].NUTR_CONT6,
+                    nutritionList[targetNum].NUTR_CONT7,
+                    nutritionList[targetNum].NUTR_CONT8,
+                    nutritionList[targetNum].NUTR_CONT9
+                ],
+                backgroundColor: [
+                    '#4dc9f6',
+                    '#f67019',
+                    '#f53794',
+                    '#537bc4',
+                    '#acc236',
+                    '#166a8f',
+                    '#00a950',
+                    '#58595b',
+                    '#8549ba'
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: [
+                '칼로리',
+                '탄수화물',
+                '단백질',
+                '지방',
+                '당류',
+                '나트륨',
+                '콜레스테롤',
+                '포화지방산',
+                '트렌스지방'
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Doughnut Chart'
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    };
+
+    window.onload = function() {
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myDoughnut = new Chart(ctx, config);
+    };
+
+    var colorNames = Object.keys(window.chartColors);
+
+
+</script>
+</html>

@@ -1,0 +1,4 @@
+user_code,user_id,user_pw,user_name,user_phone,user_address,user_eatlist,user_allergy
+1,ssafy,ssafy,싸피,123,123,123,123
+2,admin,admin,SSAFY,000-0000-0000,SSAFY,"1,2,3,4","대두,돼지고기,땅콩,복숭아,새우,우유"
+3,test,test,test,test,test,test,10

@@ -1,0 +1,292 @@
+<html>
+<head>
+    <title>SafeFoodForYou</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./asset/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--<script type="text/javascript" src="./asset/js/jquery-3.3.1.min.js"></script>-->
+    <script type="text/javascript" src="./asset/js/bootstrap-4.1.0.min.js"></script>
+    <script type="text/javascript" src="./asset/js/localStorage.js"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="./Main.html" class="navbar-brand"><span class="safe-text">Safe</span>FoodForYou</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#">공지사항</a>
+                <a class="nav-item nav-link" href="#">상품정보</a>
+                <a class="nav-item nav-link" href="#">베스트 섭취 정보</a>
+                <a class="nav-item nav-link" href="#">내 섭취 정보</a>
+                <a class="nav-link" href="#">로그인</a>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="jumbotron text-center">
+        <div id="logo">
+            <h1><span class="safe-text">Safe</span> Food For You</h1>
+        </div>
+        <div id="search-box">
+            <form class="form-inline search-form">
+                <input id="input" class="form-control" type="text">
+                <input id="search" class="btn btn-default btn-safe" value="검색">
+            </form>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="item-group">
+            <!-- item input -->
+        </div>
+    </div>
+</main>
+<footer>
+    <hr/>
+    <h4>Contacts</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>서울특별시 강남구 언주로 508 7층 701호(역삼동, 서울상록빌딩)</p>
+            <p>Team 16 & 23</p>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <p class="text-muted text-right">Copyright for SSAFY all rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+<style>
+    body {
+        margin: 0;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    a:link,a:visited,a:active,a:hover {
+        text-decoration:none;
+        color: black;
+    }
+
+    main {
+        margin: 15% 5%;
+    }
+
+    footer {
+        margin: 0 20%;
+    }
+
+    .jumbotron {
+        background-color: white;
+        margin: 5% auto;
+    }
+
+    .search-form {
+        margin: 3% 0 10% 15%;
+    }
+
+    .search-form > .form-control {
+        width: 70%;
+        margin: 0 3%;
+    }
+
+    #ingredient{
+        width: 580px;
+    }
+
+    .safe-text {
+        color:rgb(22, 160, 133);
+    }
+
+    .btn-safe {
+        background-color: rgb(22, 160, 133);
+        width: 100px;
+        color: white;
+    }
+    img {
+        width: 200px;
+    }
+    .item{
+        margin: 0 0 7% 0;
+    }
+    .info-block {
+        display: inline-block;
+        vertical-align: top;
+        margin: 2%;
+    }
+    .contents {
+        margin: 5% 23%;
+    }
+    .btn-set {
+        display: flex;
+        justify-content: center;
+        margin: 5% 0;
+    }
+    .btn-primary {
+        margin: 0 2%;
+    }
+    .item{
+        z-index: 1;
+    }
+</style>
+<script>
+    var foodList = [];
+    var nutritionList = [];
+    parseXml("./asset/data/foodInfo.xml", "food");
+    parseXml("./asset/data/FoodNutritionInfo.xml", "nutrition");
+
+    $(function(){
+        $(".item-group").on("click", ".item", function(e){
+            var item = e.currentTarget;
+            var num = item.childNodes[0].childNodes[0].childNodes[1].getAttribute("value");
+            setData("num", num);
+            location.href = "./Product.html"
+        });
+    });
+
+    $("#search").click(function(){
+        var word = $("#input").val();
+        search(word);
+    });
+
+
+    function search(word) {
+        $(".item-group").empty();
+        for(var food in foodList){
+            if(foodList[food]["name"].includes(word)
+                || foodList[food]["maker"].includes(word)
+                || foodList[food]["material"].includes(word)){
+
+                var html = '<div id="item" class="item"><div class="product-info"><div class="info-block">'
+                    + '<img src="./asset/'
+                    + foodList[food]["image"]
+                    + '">'
+                    + '<input id="code" type="hidden" value="'
+                    + foodList[food]["code"]
+                    + '">'
+                    + '<div class="btn-set">'
+                    + '<button type="button" class="btn btn-primary">추가</button>'
+                    + '<button type="button" class="btn btn-primary">찜</button>'
+                    + '</div></div>'
+                    + '<div class="info-block">'
+                    + '<div class="product-title">'
+                    + '<h3 id="name">'
+                    + foodList[food]["name"]
+                    + '</h3>'
+                    + '<p id="company">'
+                    + foodList[food]["maker"]
+                    + '</p></div><div class="product-ingredient"><p id="ingredient">'
+                    + foodList[food]["material"]
+                    + '</p></div></div>'
+                    + '</div></div></div>'
+                $(".item-group").append(html);
+
+            }
+        }
+    }
+
+    function viewAllList() {
+        $(".item-group").empty();
+        for(var food in foodList){
+            var html = '<div class="item"><div class="product-info"><div class="info-block">'
+                        + '<img src="./asset/'
+                        + foodList[food]["image"]
+                        + '">'
+                        + '<input type="hidden" value="'
+                        + foodList[food]["code"]
+                        + '">'
+                        + '<div class="btn-set">'
+                        + '<button type="button" class="btn btn-primary">추가</button>'
+                        + '<button type="button" class="btn btn-primary">찜</button>'
+                        + '</div></div>'
+                        + '<div class="info-block">'
+                        + '<div class="product-title">'
+                        + '<h3 id="name">'
+                        + foodList[food]["name"]
+                        + '</h3>'
+                        + '<p id="company">'
+                        + foodList[food]["maker"]
+                        + '</p></div><div class="product-ingredient"><p id="ingredient">'
+                        + foodList[food]["material"]
+                        + '</p></div></div>'
+                        + '</div></div></div>'
+            $(".item-group").append(html);
+        }
+    }
+
+    function parseXml(url, kind) {
+        if(kind == "food"){
+            foodList = [];
+
+            $.ajax(
+                {
+                    'url' : url,
+                    'type' : 'GET',
+                    'success' : function(res){
+                        $("food", res).each(function(){
+                            var food = {
+                                code : $(this).find("code").text(),
+                                name : $(this).find("name").text(),
+                                maker : $(this).find("maker").text(),
+                                material : $(this).find("material").text(),
+                                image : $(this).find("image").text(),
+                            }
+
+                            foodList.push(food);
+                        });
+                        setData("foodList", foodList);
+                        viewAllList();
+                    },
+                    'error' : function( jqXHR,  textStatus,  errorThrown){
+                        alert("ajax fail : "+textStatus+"/"+errorThrown);
+                    },
+                });
+
+        } else if(kind == "nutrition"){
+            nutritionList = [];
+
+            $.ajax(
+                {
+                    'url' : url,
+                    'type' : 'GET',
+                    'success' : function(res){
+                        $("item", res).each(function(){
+                            var item = {
+                                DESC_KOR : $(this).find("DESC_KOR").text(),
+                                SERVING_WT : $(this).find("SERVING_WT").text(),
+                                NUTR_CONT1 : $(this).find("NUTR_CONT1").text(),
+                                NUTR_CONT2 : $(this).find("NUTR_CONT2").text(),
+                                NUTR_CONT3 : $(this).find("NUTR_CONT3").text(),
+                                NUTR_CONT4 : $(this).find("NUTR_CONT4").text(),
+                                NUTR_CONT5 : $(this).find("NUTR_CONT5").text(),
+                                NUTR_CONT6 : $(this).find("NUTR_CONT6").text(),
+                                NUTR_CONT7 : $(this).find("NUTR_CONT7").text(),
+                                NUTR_CONT8 : $(this).find("NUTR_CONT8").text(),
+                                NUTR_CONT9 : $(this).find("NUTR_CONT9").text(),
+                                BGN_YEAR : $(this).find("BGN_YEAR").text(),
+                                ANIMAL_PLANT : $(this).find("ANIMAL_PLANT").text(),
+                            }
+
+                            nutritionList.push(item);
+                        });
+                        setData("nutritionList", nutritionList);
+                    },
+                    'error' : function( jqXHR,  textStatus,  errorThrown){
+                        alert("ajax fail : "+textStatus+"/"+errorThrown);
+                    },
+                });
+        }
+
+    }
+</script>
+</html>
