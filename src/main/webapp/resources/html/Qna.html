@@ -13,8 +13,9 @@
   
 </head>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="./Main.html" class="navbar-brand"><span class="safe-text">Safe</span>FoodForYou</a>
+   <nav class="navbar navbar-expand-lg navbar-dark"
+		style="background-color: #52100d;">
+		    <a href="../../food/main.do" class="navbar-brand"><span class="safe-text" style="color: rgb(60, 144, 226);">Safe</span>FoodForYou</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,14 +24,14 @@
             </div>
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#">공지사항</a>
-                <a class="nav-item nav-link" href="#">상품정보</a>
-                <a class="nav-item nav-link" href="#">베스트 섭취 정보</a>
-                <a class="nav-item nav-link" href="#">내 섭취 정보</a>
-                <a class="nav-link" href="#">로그인</a>
+                <a class="nav-item nav-link" href="../../food/SearchPage.do">전체 상품 정보</a>
+                <a class="nav-item nav-link" href="./Qna.html">Q&A</a>
+                <a class="nav-item nav-link" href="../../user/userinfo.do">내 섭취 정보</a>
             </div>
         </div>
     </nav>
 </header>
+
 
 <body>
 	<div id="app">
@@ -45,12 +46,14 @@
 						<tr>
 							<th>질문번호</th>
 							<th>질문내용</th>
+							<th>작성자</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="qna in qnas">
 							<td v-text="qna.qna_code" />
 							<td v-text="qna.qna_text" />
+							<td v-text="qna.user_user_id" />
 							<td><input type="button" value="조회" v-on:click="getQna(qna.qna_code)"/></td>
 						</tr>
 					</tbody>
@@ -71,27 +74,36 @@
 							<th>질문내용</th>
 							<td><input type="text" v-model = "qna.qna_text"/></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>유저 코드</th>
 							<td><input type="text" v-model = "qna.user_user_code"/></td>
-						</tr>
+						</tr>  -->
 						<tr>
 							<th>유저 아이디</th>
 							<td><input type="text" v-model = "qna.user_user_id"/></td>
 						</tr>
-						<tr>
+						
+						
+						<!-- <tr>
 							<th>부모 댓글</th>
 							<td><input type="text" v-model = "qna.qna_parent"/></td>
-						</tr>
-			
+						</tr>  -->
+						
 					</tbody>
+					
+					
+					
+					
 					<tfoot>
 						<tr>
 							<td colspan="2" style="text-align: center">
-							 <input type="button" value="추가" @click = "addQna"/> 
+							<input type="button" value="추가" @click = "addQna"/> 
 						 	<input type="button" value="수정" @click = "modifyQna"/>
-							<input type="button" value="삭제" v-on:click="removeQna(qna.qna_code)"/></td> 
+							<input type="button" value="삭제" v-on:click="removeQna(qna.qna_code)"/> 
+							
+							<input type="button" value="댓글확인" v-on:click="getQna(qna.qna_parent)"/></td>
 						</tr>
+						
 					</tfoot>
 				</table>
 			</div>
@@ -134,11 +146,11 @@
 				
 				getQna(qna_code) {
 					this.isLoading = true;
-					
+					let self = this;
 					axios.get("http://127.0.0.1:8080/question/qna/"+qna_code)
 						.then( response => {
-								this.qna = response.data;
-							
+								self.qna = response.data;
+								
 							}
 							/* function(response) {
 								
@@ -153,22 +165,13 @@
 					});
 				},
 				
-				removeQna() {
+				removeQna(qna_code) {
 					this.isLoading = true;
-					axios.delete("http://127.0.0.1:8080/question/qna/"+this.qna_code)
-						.then( response => {
-								if(response.data) {
-									alert("삭제 성공");
-									this.getDirectors();
-								} else {
-									alert("삭제 실패");
-								}
-							
-							}
-							/* function(response) {
-								
-							} */
-						).catch( error => {
+					axios.delete("http://127.0.0.1:8080/question/qna/"+qna_code)
+						.then(response => {
+							this.getQnaList();
+						})
+						.catch( error => {
 							if(error.response.status == 404) {
 								alert('삭제할 qna가 존재하지 않습니다...');
 							}
@@ -201,7 +204,7 @@
 					this.isLoading = true;
 					axios.put("http://127.0.0.1:8080/question/qna", {
 						"qna_code" : this.qna.qna_code,
-						"qna_text" : this.qna.name,
+						"qna_text" : this.qna.qna_text,
 						"user_user_code" : this.qna.user_user_code,
 						"user_user_id" : this.qna.user_user_id,
 						"qna_parent" : this.qna.qna_parent
@@ -234,7 +237,7 @@
     <h4>Contacts</h4>
     <div class="row">
         <div class="col-sm-6">
-            <p>서울특별시 강남구 언주로 508 7층 701호(역삼동, 서울상록빌딩)</p>
+            <p>서울특별시 강남구 언주로 508 7층 704호(역삼동, 서울상록빌딩)</p>
             <p>Junho & Hayeon</p>
         </div>
         <div class="col-sm-1"></div>

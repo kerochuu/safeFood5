@@ -21,7 +21,7 @@
 					href="${pageContext.request.contextPath}/food/SearchPage.do"
 					>전체 상품 정보</a> 
 					
-					<a class="nav-item nav-link" href="#"> Q&A</a>
+					<a class="nav-item nav-link" href="${pageContext.request.contextPath}/resources/html/Qna.html"> Q&A</a>
 					<a class="nav-item nav-link" href="#">|</a>
 				<c:if test="${userId != null }">
 					<a class="nav-item nav-link"
