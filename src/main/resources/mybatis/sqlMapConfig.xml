@@ -12,11 +12,13 @@
 	<typeAliases>
 		<typeAlias type="com.ssafy.spring.vo.Food" alias="Food"/> 
 		<typeAlias type="com.ssafy.spring.vo.User" alias="User"/> 
+		<typeAlias type="com.ssafy.spring.vo.Qna" alias="Qna"/> 
 	</typeAliases>
 
 	<mappers>
 	
 		<mapper resource="mapper/Food.xml"/>
 		<mapper resource="mapper/User.xml"/>
+		<mapper resource="mapper/Qna.xml"/>
 	</mappers>
 </configuration>  

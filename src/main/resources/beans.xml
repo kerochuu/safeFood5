@@ -32,5 +32,9 @@
 		p:session-ref="session" />
 	<bean id="userService" class="com.ssafy.spring.service.UserServiceImpl" p:userDao-ref="userDao" />
 
+	<bean id="qnaDao" class="com.ssafy.spring.dao.QnaDAOImpl"
+		p:session-ref="session" />
+	<bean id="qnaService" class="com.ssafy.spring.service.QnaServiceImpl" p:qnaDao-ref="qnaDao" />
+
 
 </beans>

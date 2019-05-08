@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+   <!-- <script type="text/javascript" src="../js/bootstrap-4.1.0.min.js"></script> --> 
+    <script type="text/javascript" src="../js/localStorage.js"></script>    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ 
+  
+</head>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="./Main.html" class="navbar-brand"><span class="safe-text">Safe</span>FoodForYou</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#">공지사항</a>
+                <a class="nav-item nav-link" href="#">상품정보</a>
+                <a class="nav-item nav-link" href="#">베스트 섭취 정보</a>
+                <a class="nav-item nav-link" href="#">내 섭취 정보</a>
+                <a class="nav-link" href="#">로그인</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+	<div id="app">
+		<div style="width: 1100px; margin: 0 auto; margin-top: 100px;">
+			<input type="button" value="전체조회" @click="getQnaList" />
+			<span v-show = "isLoading">로딩중........</span> <!-- <span style = 'display:inline'>로딩중</span> -->
+															<!---->
+			<hr />
+			<div style="overflow: hidden;">
+				<table style="width: 500px; float: left">
+					<thead>
+						<tr>
+							<th>질문번호</th>
+							<th>질문내용</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="qna in qnas">
+							<td v-text="qna.qna_code" />
+							<td v-text="qna.qna_text" />
+							<td><input type="button" value="조회" v-on:click="getQna(qna.qna_code)"/></td>
+						</tr>
+					</tbody>
+				</table>
+				<table style="width: 500px; float: left; margin-left: 50px;">
+					<thead>
+						<tr>
+							<th colspan="2">질문 상세 정보</th>
+						</tr>
+					</thead>
+					<tbody>
+		
+						<tr>
+							<th>질문번호</th>
+							<td><input type="text" v-model = "qna.qna_code"/></td>
+						</tr>
+						<tr>
+							<th>질문내용</th>
+							<td><input type="text" v-model = "qna.qna_text"/></td>
+						</tr>
+						<tr>
+							<th>유저 코드</th>
+							<td><input type="text" v-model = "qna.user_user_code"/></td>
+						</tr>
+						<tr>
+							<th>유저 아이디</th>
+							<td><input type="text" v-model = "qna.user_user_id"/></td>
+						</tr>
+						<tr>
+							<th>부모 댓글</th>
+							<td><input type="text" v-model = "qna.qna_parent"/></td>
+						</tr>
+			
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2" style="text-align: center">
+							 <input type="button" value="추가" @click = "addQna"/> 
+						 	<input type="button" value="수정" @click = "modifyQna"/>
+							<input type="button" value="삭제" v-on:click="removeQna(qna.qna_code)"/></td> 
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		let app = new Vue({
+			el : "#app",
+			data : {
+				qnas : [],
+				qna : {},
+				isLoading : false
+			},
+			methods : {
+				getQnaList() {
+					this.isLoading = true;
+					let self = this;
+					//axios.get("http://127.0.0.1:8080/0503_02_axios_rest_front/directors.json") 
+					
+					axios.get("http://127.0.0.1:8080/question/qnas") 
+						.then(function(response) {
+							if(response.status == 200) {
+								self.qnas = response.data;
+							} else if(response.status == 204) {
+								alert("서버와의 통신은 성공 && 데이터가 엄서용...");
+							}
+							console.log(response);
+							
+						})
+						
+						.catch(function(error) {
+							alert("통신실패");
+						})
+					.finally(()=>{
+						this.isLoading = false;
+					});
+				},
+				
+				getQna(qna_code) {
+					this.isLoading = true;
+					
+					axios.get("http://127.0.0.1:8080/question/qna/"+qna_code)
+						.then( response => {
+								this.qna = response.data;
+							
+							}
+							/* function(response) {
+								
+							} */
+						).catch( error => {
+							if(error.response.status == 404) {
+								alert('조회할 qna가 존재하지 않습니다...');
+							}
+						})
+					.finally(()=>{
+						this.isLoading = false;
+					});
+				},
+				
+				removeQna() {
+					this.isLoading = true;
+					axios.delete("http://127.0.0.1:8080/question/qna/"+this.qna_code)
+						.then( response => {
+								if(response.data) {
+									alert("삭제 성공");
+									this.getDirectors();
+								} else {
+									alert("삭제 실패");
+								}
+							
+							}
+							/* function(response) {
+								
+							} */
+						).catch( error => {
+							if(error.response.status == 404) {
+								alert('삭제할 qna가 존재하지 않습니다...');
+							}
+						})
+					.finally(()=>{
+						this.isLoading = false;
+					});
+					
+				},
+				
+				addQna() {
+					this.isLoading = true;
+					axios.post("http://127.0.0.1:8080/question/qna", this.qna)
+					.then(response => {
+						this.getQnaList();
+					})
+					.catch( error => {
+							if(error.response.status == 409) {
+								alert('Qna 아이디가 이미 존재합니다...');
+							}
+						})
+					
+
+					.finally(()=>{
+						this.isLoading = false;
+					});
+				},
+				
+				modifyQna() {
+					this.isLoading = true;
+					axios.put("http://127.0.0.1:8080/question/qna", {
+						"qna_code" : this.qna.qna_code,
+						"qna_text" : this.qna.name,
+						"user_user_code" : this.qna.user_user_code,
+						"user_user_id" : this.qna.user_user_id,
+						"qna_parent" : this.qna.qna_parent
+					})
+					.then(response => {
+						this.getQnaList();
+					})
+					.catch( error => {
+						if(error.response.status == 404) {
+							alert('수정할 Qna가 존재하지 않습니다...');
+						}
+					})
+					
+					.finally(()=>{
+						this.isLoading = false;
+					});
+				
+				},
+				mounted() {
+					this.getQnaList();
+				}
+			}
+			
+		});
+		
+	</script>
+</body>
+<footer>
+    <hr/>
+    <h4>Contacts</h4>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>서울특별시 강남구 언주로 508 7층 701호(역삼동, 서울상록빌딩)</p>
+            <p>Junho & Hayeon</p>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <p class="text-muted text-right">Copyright for SSAFY all rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<style>
+	footer {
+		margin: 0 20%;
+	}
+</style>
+
+<style>
+    body {
+        margin: 0;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    a:link,a:visited,a:active,a:hover {
+        text-decoration:none;
+        color: black;
+    }
+
+    main {
+        margin: 15% 5%;
+    }
+
+    footer {
+        margin: 0 20%;
+    }
+
+    .jumbotron {
+        background-color: white;
+        margin: 5% auto;
+    }
+
+    .search-form {
+        margin: 3% 0 10% 15%;
+    }
+
+    .search-form > .form-control {
+        width: 70%;
+        margin: 0 3%;
+    }
+
+    #ingredient{
+        width: 580px;
+    }
+
+	.safe-text {
+		color: rgb(22, 160, 133);
+	}
+	
+	.btn-safe {
+		background-color: rgb(22, 160, 133);
+		width: 100px;
+		color: white;
+	}
+    img {
+        width: 200px;
+    }
+    .item{
+        margin: 0 0 7% 0;
+    }
+    .info-block {
+        display: inline-block;
+        vertical-align: top;
+        margin: 2%;
+    }
+    .contents {
+        margin: 5% 23%;
+    }
+    .btn-set {
+        display: flex;
+        justify-content: center;
+        margin: 5% 0;
+    }
+    .btn-primary {
+        margin: 0 2%;
+    }
+    .item{
+        z-index: 1;
+    }
+    
+    
+    
+    
+    
+</style>
+</html>
