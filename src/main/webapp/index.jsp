@@ -2,17 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%
-	Cookie[] cookie = request.getCookies();
-	String id = "";
-	if (cookie != null) {
-		for (int i = 0; i < cookie.length; ++i) {
-			if (cookie[i].getName().trim().equals("uid")) {
-				id = cookie[i].getValue();
-			}
-		}
-	}
-%>
 
 <!DOCTYPE html>
 <html>
@@ -40,8 +29,14 @@
 				<img src="${pageContext.request.contextPath}/resources/img/logo.png">
 			</div>
 			<div class="signIn-field">
-				아이디 <br /> <input type="text" name="id" placeholder="ID"> <br />
-				비밀번호 <br /> <input type="password" name="pw" placeholder="PASSWORD">
+				<label>아이디 
+					    <input type="text" class="form-control" name="id" placeholder="ID" required="required">
+				</label>
+					    <br/>
+				<label>비밀번호
+					    <input type="password" class="form-control" name="pw" placeholder="PASSWORD" required="required">
+				</label>
+					    <br/>
 
 			</div>
 
