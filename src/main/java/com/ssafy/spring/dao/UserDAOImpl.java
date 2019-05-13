@@ -44,7 +44,6 @@ public class UserDAOImpl implements UserDAO {
 	public User findUserWithFoodList(int user_code) {
 		return session.selectOne("findUserWithFoodList", user_code);
 	}
-<<<<<<< HEAD
 
 	@Override
 	public int changePw(User user) {
@@ -60,15 +59,6 @@ public class UserDAOImpl implements UserDAO {
 	public int deleteInfo(String user_id) {
 		return session.delete("user.deleteInfo", user_id);
 	}
-
-
-
-
-
-	
-=======
->>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
-	
 
 
 }

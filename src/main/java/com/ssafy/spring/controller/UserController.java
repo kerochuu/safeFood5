@@ -33,12 +33,8 @@ public class UserController {
 	public String login(HttpSession session,String id,String pw) {
 		User user = userService.searchById(id);
 		if(user!=null && user.getUser_pw().equals(pw)) {
-<<<<<<< HEAD
 			session.setAttribute("userId", id);			
 			return "MainPage";
-=======
-			session.setAttribute("userId", id);
->>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 		}
 		
 		return "redirect:/index.jsp";
@@ -96,8 +92,6 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 	
-<<<<<<< HEAD
-=======
 	@GetMapping("/addEatList.do")
 	public String addEatList(/*@PathVariable*/ String user_id, String eatList) {
 		userService.addEatList(new User(user_id, eatList));
@@ -117,7 +111,6 @@ public class UserController {
 		}
 		return "redirect:/food/SearchPage.do";
 	}
->>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 
 	@PostMapping("/findFoodList.do")
 	public User findUserWithFoodList(int user_code) {
