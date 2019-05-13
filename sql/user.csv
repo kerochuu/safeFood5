@@ -1,4 +1,4 @@
-user_code,user_id,user_pw,user_name,user_phone,user_address,user_eatlist,user_allergy
-1,ssafy,ssafy,싸피,123,123,123,123
-2,admin,admin,SSAFY,000-0000-0000,SSAFY,"1,2,3,4","대두,돼지고기,땅콩,복숭아,새우,우유"
-3,test,test,test,test,test,test,10
+user_code,user_id,user_pw,user_name,user_phone,user_address,user_eatlist,user_allergy,user_likelist
+1,admin,admin,관리자,010-1111-1111,,NULL,NULL,/1-N/2-N/3-N/4-N/5-N/6-N/7-N/8-N/9-N/10-N/11-N/12-N/13-N/14-N/15-N/16-N/17-N/18-N/19-N/20-N/
+11,test1,test1,테스팅1,010-2222-2222,"서울시 강남구",NULL,"새우,대두,우유",/1-N/2-N/3-N/4-N/5-N/6-N/7-N/8-N/9-N/10-N/11-N/12-N/13-N/14-N/15-N/16-N/17-N/18-N/19-N/20-N/
+12,test2,test2,테스팅2,010-3333-3333,"경기도 수원시",NULL,"새우,대두,우유",/1-N/2-N/3-N/4-N/5-N/6-N/7-N/8-N/9-N/10-N/11-N/12-N/13-N/14-N/15-N/16-N/17-N/18-N/19-N/20-N/
