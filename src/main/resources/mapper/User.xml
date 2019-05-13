@@ -5,14 +5,12 @@
 <mapper namespace="user">
 
 
-<<<<<<< HEAD
-	<select id="searchId" resultType="User" parameterType="String">
+	<!-- <select id="searchId" resultType="User" parameterType="String">
 		select user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy
-	
-=======
+	</select> -->
+
 	<select id="search" resultType="User" parameterType="String">
 		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
->>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 		from user
 		where user_id=#{user_id}
 	</select>
@@ -36,7 +34,7 @@
 		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy}, #{user_likelist} )
 	</insert>
 	
-<<<<<<< HEAD
+	
 	<update id="changePw" parameterType="User">
 		update 	user
 		set 	user_pw = "0000"
@@ -55,7 +53,7 @@
 		delete  from user 
 		where   user_id = #{user_id}
 	</delete>
-=======
+
 	<update id="addEatList" parameterType="User">
 		update user
 		set user_eatlist = CASE
@@ -71,7 +69,6 @@
 		set user_likelist = #{user_likelist}
 		where user_code = #{user_Code}
 	</update>
->>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 	
 </mapper>
 

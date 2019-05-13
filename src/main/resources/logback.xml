@@ -7,15 +7,12 @@
 			<pattern>[%d{HH:mm:ss}] [%5p] [%c{1}.%M-%3L] %m %n</pattern>
 		</encoder>
 	</appender>
+	
 	<!--  sample임 : 바꾸어서 쓸것. -->
-<<<<<<< HEAD
+
  	<logger name="user" level="TRACE"/> 
 	
-=======
- 	<logger name="car" level="TRACE"/> 
- 	<logger name="user" level="TRACE"/> 	
- 	
->>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
+
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
