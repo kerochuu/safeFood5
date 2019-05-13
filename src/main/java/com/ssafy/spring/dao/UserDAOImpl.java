@@ -27,8 +27,12 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public void addEatList(User user) {
-		System.out.println(user.toString());
 		session.update("user.addEatList", user);
+	}
+	
+	@Override
+	public void addLikeList(User user) {
+		session.update("user.addLikeList", user);
 	}
 
 	@Override

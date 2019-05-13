@@ -14,4 +14,6 @@ public interface UserDAO {
 
 	void addEatList(User user);
 
+	void addLikeList(User user);
+
 }

@@ -6,7 +6,7 @@
 
 
 	<select id="search" resultType="User" parameterType="String">
-		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy
+		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
 		from user
 		where user_id=#{user_id}
 	</select>
@@ -20,8 +20,8 @@
 
 
 	<insert id="insert" parameterType="User">
-		insert into user( user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy) 
-		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy})
+		insert into user( user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist ) 
+		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy}, #{user_likelist} )
 	</insert>
 	
 	<update id="addEatList" parameterType="User">
@@ -32,6 +32,12 @@
 								ELSE concat(user_eatlist, concat(',', #{user_eatlist}))
 							END
 		where user_id = #{user_id}
+	</update>
+	
+	<update id="addLikeList" parameterType="User">
+		update user
+		set user_likelist = #{user_likelist}
+		where user_code = #{user_Code}
 	</update>
 	
 </mapper>

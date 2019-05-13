@@ -55,6 +55,20 @@ public class UserController {
 		userService.addEatList(new User(user_id, eatList));
 		return "redirect:/food/SearchPage.do";
 	}
+	
+	@GetMapping("/addLikeList.do")
+	public String addLikeList(String user_id, String likeNum) {
+		User temp = userService.searchById(user_id);
+		String likeList = temp.getUser_likelist();
+		
+		if(likeList.contains("/" + likeNum + "-Y/"))
+			System.out.println("이미 찜목록에 있어용");
+		else {
+			temp.setUser_likelist(likeList.replace("/"+likeNum+"-N/", "/"+likeNum+"-Y/"));
+			userService.addLikeList(temp);
+		}
+		return "redirect:/food/SearchPage.do";
+	}
 
 	@PostMapping("/findFoodList.do")
 	public User findUserWithFoodList(int user_code) {
