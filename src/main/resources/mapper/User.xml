@@ -9,7 +9,7 @@
 		select user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy
 	</select> -->
 
-	<select id="search" resultType="User" parameterType="String">
+	<select id="searchId" resultType="User" parameterType="String">
 		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
 		from user
 		where user_id=#{user_id}
@@ -31,7 +31,8 @@
 
 	<insert id="insert" parameterType="User">
 		insert into user( user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist ) 
-		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy}, #{user_likelist} )
+		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy}, "/1-N/2-N/3-N/4-N/5-N/6-N/7-N/8-N/9-N/10-N/11-N/12-N/13-N/14-N/15-N/16-N/17-N/18-N/19-N/20-N/" )
+	
 	</insert>
 	
 	
@@ -49,7 +50,7 @@
 		where 	user_id = #{user_id}
 	</update>
 	
-	<delete id="deleteInfo" parameterType="User">
+	<delete id="deleteInfo" parameterType="String">
 		delete  from user 
 		where   user_id = #{user_id}
 	</delete>

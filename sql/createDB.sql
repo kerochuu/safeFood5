@@ -54,27 +54,27 @@ CREATE TABLE IF NOT EXISTS `safefood`.`user` (
   `user_address` VARCHAR(100) NULL DEFAULT NULL,
   `user_eatlist` VARCHAR(100) NULL DEFAULT NULL,
   `user_allergy` VARCHAR(500) NULL DEFAULT NULL,
+  `user_likelist` VARCHAR(400) NULL DEFAULT NULL,
   PRIMARY KEY (`user_code`, `user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `safefood`.`takeeat`
+-- Table `safefood`.`qna`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `safefood`.`takeeat` (
-  `FoodInfo_food_code` INT(11) NOT NULL,
-  `User_user_id` INT(11) NOT NULL,
-  PRIMARY KEY (`FoodInfo_food_code`, `User_user_id`),
-  INDEX `fk_FoodInfo_has_User_User1_idx` (`User_user_id` ASC) VISIBLE,
-  INDEX `fk_FoodInfo_has_User_FoodInfo1_idx` (`FoodInfo_food_code` ASC) VISIBLE,
-  CONSTRAINT `fk_FoodInfo_has_User_FoodInfo1`
-    FOREIGN KEY (`FoodInfo_food_code`)
-    REFERENCES `safefood`.`food` (`food_code`),
-  CONSTRAINT `fk_FoodInfo_has_User_User1`
-    FOREIGN KEY (`User_user_id`)
-    REFERENCES `safefood`.`user` (`user_code`))
+CREATE TABLE IF NOT EXISTS `safefood`.`qna` (
+  `qna_code` INT(11) NOT NULL,
+  `qna_text` VARCHAR(800) NULL DEFAULT NULL,
+  `user_user_code` INT(11) NOT NULL,
+  `user_user_id` VARCHAR(45) NOT NULL,
+  `qna_parent` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`qna_code`),
+  INDEX `fk_qna_user_idx` (`user_user_code` ASC, `user_user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_qna_user`
+    FOREIGN KEY (`user_user_code` , `user_user_id`)
+    REFERENCES `safefood`.`user` (`user_code` , `user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

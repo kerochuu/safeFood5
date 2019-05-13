@@ -87,7 +87,8 @@ public class UserController {
 	
 	@GetMapping("/deleteInfo.do")
 	public String deleteInfo(HttpSession session, User user) {
-		System.out.println("deleteInfo.do 들어옴");
+		System.out.println("deleteInfo.do 들어옴111");
+		System.out.println("session.getAtt(userId) = " + session.getAttribute("userId") );
 		userService.deleteInfo((String) session.getAttribute("userId"));
 		return "redirect:/index.jsp";
 	}
