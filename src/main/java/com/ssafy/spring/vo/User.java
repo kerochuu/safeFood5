@@ -9,8 +9,11 @@ public class User {
 	String user_allergy;
 	String allergy;
 
-	public User() {
-		super();
+	public User() {	}
+	
+	public User(String user_id, String user_eatlist) {
+		this.user_id = user_id;
+		this.user_eatlist = user_eatlist;
 	}
 
 	public int getUser_Code() {

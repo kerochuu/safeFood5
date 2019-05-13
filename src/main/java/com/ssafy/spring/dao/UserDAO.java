@@ -12,4 +12,6 @@ public interface UserDAO {
 
 	User findUserWithFoodList(int user_code);
 
+	void addEatList(User user);
+
 }

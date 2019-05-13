@@ -23,15 +23,18 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void insertUser(User user) {
 		session.insert("user.insert", user);
-		
+	}
+	
+	@Override
+	public void addEatList(User user) {
+		System.out.println(user.toString());
+		session.update("user.addEatList", user);
 	}
 
 	@Override
 	public User findUserWithFoodList(int user_code) {
 		return session.selectOne("findUserWithFoodList", user_code);
 	}
-
-	
 	
 
 

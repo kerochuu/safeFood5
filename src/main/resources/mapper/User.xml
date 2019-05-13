@@ -24,6 +24,12 @@
 		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy})
 	</insert>
 	
+	<update id="addEatList" parameterType="User">
+		update user
+		set user_eatlist = if(user_eatlist=null, #{user_eatlist}, concat(user_eatlist, concat(',', #{user_eatlist}) ) )
+		where user_id = #{user_id}
+	</update>
+	
 </mapper>
 
 

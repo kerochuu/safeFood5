@@ -11,4 +11,6 @@ public interface UserService {
 	void insertUser(User user);
 
 	User findUserWithFoodList(int user_code);
+
+	void addEatList(User user);
 }

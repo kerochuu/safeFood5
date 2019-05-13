@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(User user) {
 		userDao.insertUser(user);
 	}
+	
+	@Override
+	public void addEatList(User user) {
+		userDao.addEatList(user);
+	}
 
 	@Override
 	public User findUserWithFoodList(int user_code) {

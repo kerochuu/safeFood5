@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.spring.service.UserService;
@@ -30,7 +32,7 @@ public class UserController {
 	public String login(HttpSession session,String id,String pw) {
 		User user = userService.searchById(id);
 		if(user!=null && user.getUser_pw().equals(pw)) {
-			session.setAttribute("userId", id);			
+			session.setAttribute("userId", id);
 		}
 		return "MainPage";
 		
@@ -46,6 +48,12 @@ public class UserController {
 	public String insertUser(User user) {
 		userService.insertUser(user);
 		return "redirect:/index.jsp";
+	}
+	
+	@GetMapping("/addEatList.do")
+	public String addEatList(/*@PathVariable*/ String user_id, String eatList) {
+		userService.addEatList(new User(user_id, eatList));
+		return "redirect:/food/SearchPage.do";
 	}
 
 	@PostMapping("/findFoodList.do")
@@ -63,9 +71,6 @@ public class UserController {
 	public String getJoin() {
 		return "SignUpPage";
 	}
-	
-	
-	
 
 
 }

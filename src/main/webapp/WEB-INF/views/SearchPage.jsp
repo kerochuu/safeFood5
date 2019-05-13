@@ -15,6 +15,7 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
+
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
@@ -49,7 +50,7 @@
 									<img
 										src="${pageContext.request.contextPath}/resources/${food.food_image}">
 									<div class="btn-set">
-										<button type="button" class="btn btn-primary">추가</button>
+										<a href="${pageContext.request.contextPath}/user/addEatList.do?user_id=${userId}&eatList=${food.food_code}"><button type="button" class="btn btn-primary" onclick="alert('섭취 목록에 추가되었습니다.');">추가</button></a>
 										<button type="button" class="btn btn-primary">찜</button>
 									</div>
 								</div>
