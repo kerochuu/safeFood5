@@ -5,72 +5,167 @@
 	<head>
 		<title>SafeFoodForYou</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"
-				integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/localStorage.js"></script>
-	</head>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/localStorage.js"></script>	</head>
 <body>
 	
-		<h1>사용자 관리-사용자 등록</h1>
-		<form action="${pageContext.request.contextPath}/user/insertUser.do" method="post">
-	    <h2 class="tilte-sub">회원가입</h2>
-	    
-	    
-	    <hr>
-	    
-	    <div class="contents">
-	    <div class="form-group">
-	    <label>아이디 </label>
-	    <input type="text" class="form-control" name="user_id" required="required"><br />
-	    </div>
-	    
-	    <div class="form-group">
-	    <label>비밀번호 </label>
-	    <input type="text" class="form-control" name="user_pw" required="required"><br />
-	    </div>
-	    
-	    <div class="form-group">
-	    <label>이름 </label>
-	    <input type="text" class="form-control" name="user_name" required="required"><br />
-	    </div>
-	    
-	    <div class="form-group">
-	    <label>핸드폰 </label>
-	    <input type="text" class="form-control" name="user_phone" required="required"><br />
-	    </div>
-	    
-	    <div class="form-group">
-	    <label>주소 </label>
-	    <input type="text" class="form-control" name="user_address" required="required"><br />
-	    </div>
-	    
-	    <div class="form-group">
-	    <label>섭취목록 </label>
-	    <input type="text" class="form-control" name="user_eatlist" required="required"><br />
-	    </div>
-	    
-	    <div class="form-group">
-	    <label>알레르기 </label>
-	    <select name="user_allergy">
-			<option selected="selected" value="10">10</option>
-			<option value="20">20</option>
-			<option value="30">30</option>
-		</select> 
-		</div>
-	    
+	
+	 
 		
-		<br /> 
-		<input type="submit" value="회원가입"> 
-		<input type="reset" value="취소">
-		</div>
+		<div class="bg"></div>
+		
+	<form action="${pageContext.request.contextPath}/user/insertUser.do" method="post">
+	   	<div class="signIn-area">
+	   	
+	   	<h2 class="tilte-sub">회원가입</h2>
 			
-	   
-	    </form>
+			
+			<div class="contents">
+				<div class="signIn-field">
+				    <div style = "width: 250px; float: left;">
+					    <label for="id" >아이디 <input id="id" type="text" class="form-control" name="user_id" required="required"></label>
+					    <br/>
+					    
+					    <label>비밀번호
+					    <input type="text" class="form-control" name="user_pw" required="required">
+					     </label>
+					     <br/>
+					     
+					    <label>이름 
+					    <input type="text" class="form-control" name="user_name" required="required">
+					    </label>
+					    <br/>
+					    
+					    <label>핸드폰 
+					    <input type="text" class="form-control" name="user_phone" required="required">
+					    </label>
+					    <br/>
+					    
+					    <label>주소 
+					    <input type="text" class="form-control" name="user_address" required="required">
+					   </label>
+					    <br/>
+					    
+					    <label>섭취목록 
+					    <input type="text" class="form-control" name="user_eatlist" required="required">
+					    </label>
+					    <br/>
+					</div>
+				
+					<div style ="float:left;">
+					    알레르기 <hr/>
+					    
+					    <label for="ebi">새우<input id = "ebi" type="checkbox" class="form-control" name="user_allergy" required="required"
+					    	value = "새우"> </label>
+					    	
+					   	<label for="kong">대두 <input id = "kong" type="checkbox" class="form-control" name="user_allergy" required="required"
+					    	value = "대두"> </label>
+					    	
+					   	<label for="milk"> 우유<input id = "milk" type="checkbox" class="form-control" name="user_allergy" required="required"
+					    	value = "우유"> </label>
+					    
+						
+					    
+						
+						<br /> 
+					</div>	
+						<br/>
+						<div class="form-btn">
+							<button type="submit" class="btn btn-block btn-primary">가입</button>
+						</div>
+			
+						<div class="form-btn">
+							<button id="goToMain" type="button" class="btn btn-block">취소</button>
+						</div>
+						
+						
+						<div class="inner-foot">
+							<p class="tag">SAFE AND FRESH</p>
+						</div>
+					
+					
+				</div>
+
+			</div>
+		</div>
+	</form>
+	
+	
 	<jsp:include page="Footer.jsp" />
 </body>
 <style>
+
+form {
+	width: 0;
+	height: 0;
+}
+
+
+.bg {
+	background:
+		url(${pageContext.request.contextPath}/resources/img/login-background.jpg);
+	height: 800px;
+	position: relative;
+	z-index: -1;
+	margin: 0 0 0 20%;
+}
+
+.signIn-area {
+	background: white;
+	position: relative;
+	z-index: 1;
+	height: 800px;
+	width: 600px;
+	padding: 50px;
+	left: 250px;
+	top: -700px;
+}
+
+.in-row {
+	margin: 20px 0 0 0;
+}
+
+.form-util {
+	margin: 20px 0 0 0;
+	font-size: 14px;
+	color: #4f5a66;
+	font-weight: bold;
+}
+
+.form-btn {
+	margin: 30px 0 0 0;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.inner-foot {
+	margin: 50px 0 0 0;
+}
+
+.tag {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ddd;
+}
+
+.label {
+	width: 100%;
+}
+
+.form-control {
+	width: 100%;
+	border: 1px solid;
+	border-color: #ddd;
+}
     body {
         margin: 0;
     }
@@ -91,4 +186,11 @@
         margin: 1%;
     }
 </style>
+<script>
+	$("#goToMain")
+			.click(
+					function() {
+						location.href = "${pageContext.request.contextPath}/index.jsp";
+					});
+</script>
 </html>

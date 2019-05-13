@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `safefood` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema safefood
 -- -----------------------------------------------------
@@ -20,7 +20,7 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 -- Schema safefood
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `safefood` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+USE `safefood` ;
 
 -- -----------------------------------------------------
 -- Table `safefood`.`user`
@@ -43,7 +43,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `mydb`.`qna`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`qna` (
+CREATE TABLE IF NOT EXISTS `safefood`.`qna` (
   `qna_code` INT NOT NULL,
   `qna_text` VARCHAR(800) NULL,
   `user_user_code` INT(11) NOT NULL,
