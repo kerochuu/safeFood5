@@ -26,7 +26,11 @@
 	
 	<update id="addEatList" parameterType="User">
 		update user
-		set user_eatlist = if(user_eatlist=null, #{user_eatlist}, concat(user_eatlist, concat(',', #{user_eatlist}) ) )
+		set user_eatlist = CASE
+							WHEN user_eatlist is null
+								THEN #{user_eatlist}
+								ELSE concat(user_eatlist, concat(',', #{user_eatlist}))
+							END
 		where user_id = #{user_id}
 	</update>
 	
