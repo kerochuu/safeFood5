@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.spring.service.UserService;
@@ -31,8 +33,12 @@ public class UserController {
 	public String login(HttpSession session,String id,String pw) {
 		User user = userService.searchById(id);
 		if(user!=null && user.getUser_pw().equals(pw)) {
+<<<<<<< HEAD
 			session.setAttribute("userId", id);			
 			return "MainPage";
+=======
+			session.setAttribute("userId", id);
+>>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 		}
 		
 		return "redirect:/index.jsp";
@@ -90,6 +96,28 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 	
+<<<<<<< HEAD
+=======
+	@GetMapping("/addEatList.do")
+	public String addEatList(/*@PathVariable*/ String user_id, String eatList) {
+		userService.addEatList(new User(user_id, eatList));
+		return "redirect:/food/SearchPage.do";
+	}
+	
+	@GetMapping("/addLikeList.do")
+	public String addLikeList(String user_id, String likeNum) {
+		User temp = userService.searchById(user_id);
+		String likeList = temp.getUser_likelist();
+		
+		if(likeList.contains("/" + likeNum + "-Y/"))
+			System.out.println("이미 찜목록에 있어용");
+		else {
+			temp.setUser_likelist(likeList.replace("/"+likeNum+"-N/", "/"+likeNum+"-Y/"));
+			userService.addLikeList(temp);
+		}
+		return "redirect:/food/SearchPage.do";
+	}
+>>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 
 	@PostMapping("/findFoodList.do")
 	public User findUserWithFoodList(int user_code) {
@@ -113,9 +141,6 @@ public class UserController {
 	public String getJoin() {
 		return "SignUpPage";
 	}
-	
-	
-	
 
 
 }

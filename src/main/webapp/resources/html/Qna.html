@@ -39,6 +39,7 @@
 			<input type="button" value="전체조회" @click="getQnaList" />
 			<span v-show = "isLoading">로딩중........</span> <!-- <span style = 'display:inline'>로딩중</span> -->
 															<!---->
+			<span v-show = "isLoading2">로딩2222........</span>
 			<hr />
 			<div style="overflow: hidden;">
 				<table style="width: 500px; float: left">
@@ -54,7 +55,7 @@
 							<td v-text="qna.qna_code" />
 							<td v-text="qna.qna_text" />
 							<td v-text="qna.user_user_id" />
-							<td><input type="button" value="조회" v-on:click="getQna(qna.qna_code)"/></td>
+							<td><input type="button" value="조회" v-on:click="getQna(qna.qna_code); getAnswerList(qna.qna_code);"/></td>
 						</tr>
 					</tbody>
 				</table>
@@ -74,20 +75,20 @@
 							<th>질문내용</th>
 							<td><input type="text" v-model = "qna.qna_text"/></td>
 						</tr>
-						<!-- <tr>
+						<tr>
 							<th>유저 코드</th>
 							<td><input type="text" v-model = "qna.user_user_code"/></td>
-						</tr>  -->
+						</tr>
 						<tr>
 							<th>유저 아이디</th>
 							<td><input type="text" v-model = "qna.user_user_id"/></td>
 						</tr>
 						
 						
-						<!-- <tr>
-							<th>부모 댓글</th>
+						<tr>
+							<th>부모 코드</th>
 							<td><input type="text" v-model = "qna.qna_parent"/></td>
-						</tr>  -->
+						</tr>
 						
 					</tbody>
 					
@@ -101,9 +102,26 @@
 						 	<input type="button" value="수정" @click = "modifyQna"/>
 							<input type="button" value="삭제" v-on:click="removeQna(qna.qna_code)"/> 
 							
-							<input type="button" value="댓글확인" v-on:click="getQna(qna.qna_parent)"/></td>
+							<input type="button" value="댓글확인" v-on:click="getAnswerList(qna.qna_code)"/></td>
 						</tr>
 						
+						<tr><td></td></tr>
+						<template v-if="comments.length > 0">
+						<template v-for="comment in comments">
+							<tr>
+								<th>댓글번호</th> <td v-text="comment.qna_code" />
+							</tr>
+							<tr>
+								<th>댓글내용</th> <td v-text="comment.qna_text" />
+							</tr>
+							<tr>
+								<th>유저 아이디</th> <td v-text="comment.user_user_id" />
+							</tr>
+							<tr>
+								<th>유저 코드</th> <td v-text="comment.user_user_code" />
+							</tr>
+						</template>
+						</template>
 					</tfoot>
 				</table>
 			</div>
@@ -116,8 +134,10 @@
 			el : "#app",
 			data : {
 				qnas : [],
-				qna : {},
-				isLoading : false
+				qna : {}, // 글 내용
+				isLoading : false,
+				isLoading2 : false,
+				comments: [] // 댓글
 			},
 			methods : {
 				getQnaList() {
@@ -144,14 +164,15 @@
 					});
 				},
 				
-				getQna(qna_code) {
+				getQna(qna_code) { // 조회
 					this.isLoading = true;
 					let self = this;
 					axios.get("http://127.0.0.1:8080/question/qna/"+qna_code)
-						.then( response => {
-								self.qna = response.data;
-								
-							}
+						.then( response =>
+								{
+									self.qna = response.data;
+								}
+							//}
 							/* function(response) {
 								
 							} */
@@ -162,6 +183,28 @@
 						})
 					.finally(()=>{
 						this.isLoading = false;
+					});
+				},
+				
+				getAnswerList(qna_parent) {
+					this.isLoading2 = true;
+					let self = this;
+					axios.get("http://127.0.0.1:8080/question/answers/" + qna_parent) 
+						.then(function(response) {
+							if(response.status == 200) {
+								self.comments = response.data;
+							} else if(response.status == 204) {
+								console.log("서버와의 통신은 성공 && 댓글이 엄서용...");
+							}
+							console.log(response);
+							
+						})
+						
+						.catch(function(error) {
+							alert("통신실패");
+						})
+					.finally(()=>{
+						this.isLoading2 = false;
 					});
 				},
 				

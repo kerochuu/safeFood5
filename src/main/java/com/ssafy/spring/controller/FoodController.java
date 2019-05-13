@@ -47,9 +47,5 @@ public class FoodController {
 		model.addAttribute("foodList", foodService.selectFoodList());
 		return "SearchPage";
 	}
-	
-	
-	
-
 
 }

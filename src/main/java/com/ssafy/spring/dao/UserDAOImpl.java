@@ -28,13 +28,23 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void insertUser(User user) {
 		session.insert("user.insert", user);
-		
+	}
+	
+	@Override
+	public void addEatList(User user) {
+		session.update("user.addEatList", user);
+	}
+	
+	@Override
+	public void addLikeList(User user) {
+		session.update("user.addLikeList", user);
 	}
 
 	@Override
 	public User findUserWithFoodList(int user_code) {
 		return session.selectOne("findUserWithFoodList", user_code);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public int changePw(User user) {
@@ -56,6 +66,8 @@ public class UserDAOImpl implements UserDAO {
 
 
 	
+=======
+>>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 	
 
 

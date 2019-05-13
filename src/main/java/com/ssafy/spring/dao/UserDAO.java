@@ -20,4 +20,8 @@ public interface UserDAO {
 	
 	int deleteInfo(String user_id);
 
+	void addEatList(User user);
+
+	void addLikeList(User user);
+
 }

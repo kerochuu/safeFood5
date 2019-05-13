@@ -13,10 +13,17 @@ public interface UserService {
 	boolean insertUser(User user);
 
 	User findUserWithFoodList(int user_code);
+<<<<<<< HEAD
 	
 	boolean changePw(User user);
 	
 	boolean changeInfo(User user);
 	
 	boolean deleteInfo(String user_id);
+=======
+
+	void addEatList(User user);
+
+	void addLikeList(User user);
+>>>>>>> 15198b3855516d66e1fe8e3333e068028159411b
 }
