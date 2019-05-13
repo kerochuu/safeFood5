@@ -17,7 +17,12 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User searchById(String user_id) {
 	
-		return session.selectOne("user.search", user_id);
+		return session.selectOne("user.searchId", user_id);
+	}
+	
+	@Override
+	public User searchByCode(int user_code) {
+		return session.selectOne("user.searchCode", user_code);
 	}
 
 	@Override
@@ -30,6 +35,25 @@ public class UserDAOImpl implements UserDAO {
 	public User findUserWithFoodList(int user_code) {
 		return session.selectOne("findUserWithFoodList", user_code);
 	}
+
+	@Override
+	public int changePw(User user) {
+		return session.update("user.changePw", user);
+	}
+
+	@Override
+	public int changeInfo(User user) {
+		return session.update("user.changeInfo", user);
+	}
+
+	@Override
+	public int deleteInfo(String user_id) {
+		return session.delete("user.deleteInfo", user_id);
+	}
+
+
+
+
 
 	
 	

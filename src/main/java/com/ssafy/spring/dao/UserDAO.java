@@ -11,5 +11,13 @@ public interface UserDAO {
 	void insertUser(User user);
 
 	User findUserWithFoodList(int user_code);
+	
+	User searchByCode(int user_code);
+	
+	int changePw(User user);
+	
+	int changeInfo(User user);
+	
+	int deleteInfo(String user_id);
 
 }

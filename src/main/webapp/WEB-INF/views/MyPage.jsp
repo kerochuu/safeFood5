@@ -40,31 +40,40 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				<div class="w3-white w3-text-grey w3-card-4">
 					<div class="w3-display-container"></div>
 					<div class="w3-container">
+						<br/>
 						<h2>${user.user_id}</h2>
-						<form method=post action="main.do">
+						
+						<form method=post action="changeInfo.do">
+							
+							<p >								<i 
+									class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><input
+									id="id" class="form-control" name="user_id" type=text
+									value="${user.user_id}">
+							</p>
+							
 							<p>
 								<i
 									class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									class="form-control" name="address" type=text
-									value="${user.address}">
+									class="form-control" name="user_address" type=text
+									value="${user.user_address}">
 							</p>
 							<p>
 								<i
 									class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									class="form-control" name="phone" type=text
-									value="${user.phone}">
+									class="form-control" name="user_phone" type=text
+									value="${user.user_phone}">
 							</p>
 							<p>
 								<i
 									class="fa fa-lock fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									class="form-control" name="pw" type=password value="${user.pw}">
+									class="form-control" name="user_pw" type=password value="${user.user_pw}">
 							</p>
 							<input type="hidden" name="method" value="editMember"> <input
 								type="hidden" name="action" value="member">
 							<div>
 								<button id="edit" type="submit"
 									class="form-control btn btn-block btn-primary">수정</button>
-								<button id="exit" type="button" class="btn btn-danger">탈퇴</button>
+								<button id="delete-Info" type="button" class="btn btn-danger">탈퇴</button>
 							</div>
 						</form>
 						<hr>
@@ -197,5 +206,11 @@ p {
 $("#exit").click(function(){
 	 location.href = "main.do?action=member&method=deleteMember";
 });
+$("#id").attr("style","diplay:none;");
+$("#delete-Info")
+.click(
+		function() {
+			location.href = "${pageContext.request.contextPath}/user/deleteInfo.do";
+		});
 </script>
 </html>

@@ -5,10 +5,17 @@
 <mapper namespace="user">
 
 
-	<select id="search" resultType="User" parameterType="String">
-		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy
+	<select id="searchId" resultType="User" parameterType="String">
+		select user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy
+	
 		from user
 		where user_id=#{user_id}
+	</select>
+	
+	<select id="searchCode" resultType="User" parameterType="int">
+		select user_code
+		from user
+		where user_code=#{user_code}
 	</select>
 
 
@@ -23,6 +30,25 @@
 		insert into user( user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy) 
 		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy})
 	</insert>
+	
+	<update id="changePw" parameterType="User">
+		update 	user
+		set 	user_pw = "0000"
+		where 	user_id = #{user_id}
+	</update>
+
+	<update id="changeInfo" parameterType="User">
+		update 	user
+		set 	user_address = #{user_address},
+				user_phone = #{user_phone},
+				user_pw = #{user_pw}
+		where 	user_id = #{user_id}
+	</update>
+	
+	<delete id="deleteInfo" parameterType="User">
+		delete  from user 
+		where   user_id = #{user_id}
+	</delete>
 	
 </mapper>
 

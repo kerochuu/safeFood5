@@ -22,10 +22,11 @@
 		 
 		<div class="bg"></div>
 		
-	<form action="${pageContext.request.contextPath}/user/insertUser.do" method="post">
+	<form action="${pageContext.request.contextPath}/user/changePw.do" method="post">
 	   	<div class="signIn-area">
 	   	                   
-	   	<h2 class="tilte-sub">회원가입</h2>
+	   	<h2 class="tilte-sub">계정찾기</h2>
+	   	<h6 class="tilte-sub">계정과 핸드폰번호가 매칭되면 비밀번호를 0000으로 초기화합니다</h6>
 			
 			
 			<div class="contents">
@@ -34,47 +35,17 @@
 					    <label for="id" >아이디 <input id="id" type="text" class="form-control" name="user_id" required="required"></label>
 					    <br/>
 					    
-					    <label>비밀번호
-					    <input type="password" class="form-control" name="user_pw" required="required">
-					     </label>
-					     <br/>
-					     
-					    <label>이름 
-					    <input type="text" class="form-control" name="user_name" required="required">
-					    </label>
-					    <br/>
-					    
 					    <label>핸드폰 
 					    <input type="text" class="form-control" name="user_phone" >
 					    </label>
 					    <br/>
 					    
-					    <label>주소 
-					    <input type="text" class="form-control" name="user_address" >
-					   </label>
-					    <br/>
-				</div>	
 				
-					<div style ="float:left;">
-					    알레르기 <hr/>
-					    
-					    <label for="ebi">새우<input id = "ebi" type="checkbox" class="form-control" name="user_allergy" 
-					    	value = "새우"> </label>
-					    	
-					   	<label for="kong">대두 <input id = "kong" type="checkbox" class="form-control" name="user_allergy" 
-					    	value = "대두"> </label>
-					    	
-					   	<label for="milk"> 우유<input id = "milk" type="checkbox" class="form-control" name="user_allergy" 
-					    	value = "우유"> </label>
-					   
-					    
-					    
-						
-						<br /> 
-					</div>	
+				
+				
 						<br/>
 						<div class="form-btn">
-							<button type="submit" class="btn btn-block btn-primary">가입</button>
+							<button type="submit" class="btn btn-block btn-primary">비밀번호 변경</button>
 						</div>
 			
 						<div class="form-btn">
@@ -90,6 +61,7 @@
 				</div>
 				    
 				</div>	    
+					</div>
 					</div>
 			
 		
@@ -119,8 +91,8 @@ form {
 	background: white;
 	position: relative;
 	z-index: 1;
-	height: 800px;
-	width: 600px;
+	height: 600px;
+	width: 400px;
 	padding: 50px;
 	left: 250px;
 	top: -700px;

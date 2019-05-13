@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%
+	Cookie[] cookie = request.getCookies();
+	String id = "";
+	if (cookie != null) {
+		for (int i = 0; i < cookie.length; ++i) {
+			if (cookie[i].getName().trim().equals("uid")) {
+				id = cookie[i].getValue();
+			}
+		}
+	}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -48,6 +58,9 @@
 
 			<div class="form-btn">
 				<button id="sign-up" type="button" class="btn btn-block">회원가입</button>
+			</div>
+			<div class="form-btn">
+				<button id="find-id" type="button" class="btn btn-block">계정찾기</button>
 			</div>
 			<div class="inner-foot">
 				<p class="tag">SAFE AND FRESH</p>
@@ -127,6 +140,11 @@ form {
 			.click(
 					function() {
 						location.href = "${pageContext.request.contextPath}/user/join.do";
+					});
+	$("#find-id")
+			.click(
+					function() {
+						location.href = "${pageContext.request.contextPath}/user/find.do";
 					});
 </script>
 </html>

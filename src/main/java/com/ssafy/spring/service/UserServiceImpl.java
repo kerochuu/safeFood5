@@ -17,15 +17,46 @@ public class UserServiceImpl implements UserService {
 	public User searchById(String user_id) {
 		return userDao.searchById(user_id);
 	}
+	
+	@Override
+	public User searchByCode(int user_code) {
+		return userDao.searchByCode(user_code);
+	}
 
 	@Override
-	public void insertUser(User user) {
-		userDao.insertUser(user);
+	public boolean insertUser(User user) {
+		if(user.getUser_id() != null ) {
+			userDao.insertUser(user);
+			return true;
+		} 
+		return false;
+		
 	}
 
 	@Override
 	public User findUserWithFoodList(int user_code) {
 		return userDao.findUserWithFoodList(user_code);
 	}
+
+	@Override
+	public boolean changePw(User user) {
+		userDao.changePw(user);		
+		return true;
+	}
+
+	@Override
+	public boolean changeInfo(User user) {
+		userDao.changeInfo(user);
+		return true;
+	}
+
+	@Override
+	public boolean deleteInfo(String user_id) {
+		System.out.println("userService delete ->");
+		userDao.deleteInfo(user_id);
+		return true;
+	}
+
+
 
 }
