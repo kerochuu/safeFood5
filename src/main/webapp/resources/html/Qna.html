@@ -100,12 +100,13 @@
 							<td colspan="2" style="text-align: center">
 							<input type="button" value="추가" @click = "addQna"/> 
 						 	<input type="button" value="수정" @click = "modifyQna"/>
-							<input type="button" value="삭제" v-on:click="removeQna(qna.qna_code)"/> 
-							
-							<input type="button" value="댓글확인" v-on:click="getAnswerList(qna.qna_code)"/></td>
+							<input type="button" value="삭제" v-on:click="removeQna(qna.qna_code)"/>
+							<!-- <input type="button" value="댓글확인" v-on:click="getAnswerList(qna.qna_code)"/></td> -->
 						</tr>
 						
-						<tr><td></td></tr>
+						<tr style="text-align: center;"><td>★</td><td>★</td></tr>
+						<tr><td colspan="2"><hr></td></tr>
+						
 						<template v-if="comments.length > 0">
 						<template v-for="comment in comments">
 							<tr>
@@ -119,6 +120,11 @@
 							</tr>
 							<tr>
 								<th>유저 코드</th> <td v-text="comment.user_user_code" />
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="button" value="댓글삭제" v-on:click="removeQna(comment.qna_code)"/>
+								</td>
 							</tr>
 						</template>
 						</template>
@@ -167,11 +173,11 @@
 				getQna(qna_code) { // 조회
 					this.isLoading = true;
 					let self = this;
+					self.comments = [];
 					axios.get("http://127.0.0.1:8080/question/qna/"+qna_code)
 						.then( response =>
 								{
 									self.qna = response.data;
-									self.comments = [];
 								}
 							//}
 							/* function(response) {
