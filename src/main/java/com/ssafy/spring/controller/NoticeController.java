@@ -62,7 +62,10 @@ public class NoticeController {
 		return "DetailNotice";
 	}
 	
-
+	@GetMapping("/addNotice.do")
+	public String newPassWord() {
+		return "AddNotice";
+	}
 
 	
 
