@@ -11,6 +11,8 @@
 	<!--  sample임 : 바꾸어서 쓸것. -->
 
  	<logger name="user" level="TRACE"/> 
+ 	<logger name="food" level="TRACE"/> 
+ 	<logger name="notice" level="TRACE"/> 
 	
 
 	<root level="INFO">

@@ -45,7 +45,7 @@
 					    <br/>
 					    
 					    <label>핸드폰 
-					    <input type="text" class="form-control" name="user_phone" >
+					    <input type="text" class="form-control" name="user_phone" placeholder="010-0000-0000">
 					    </label>
 					    <br/>
 					    

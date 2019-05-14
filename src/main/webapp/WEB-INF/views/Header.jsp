@@ -16,7 +16,7 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav mr-auto"></div>
 			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="#">공지사항</a> <a
+				<a class="nav-item nav-link" href="${pageContext.request.contextPath}/notice/noticePage.do">공지사항</a> <a
 					class="nav-item nav-link"
 					href="${pageContext.request.contextPath}/food/SearchPage.do"
 					>전체 상품 정보</a> 

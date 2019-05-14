@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ssafy</groupId>
 	<artifactId>spring</artifactId>
-	<name>SpringTest_seoul_4_김준호</name>
+	<name>SafeFoodVue_seoul_4_junho_Hayeon</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>

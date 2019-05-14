@@ -32,4 +32,8 @@
 		p:session-ref="session" />
 	<bean id="userService" class="com.ssafy.spring.service.UserServiceImpl" p:userDao-ref="userDao" />
 
+	<bean id="noticeDao" class="com.ssafy.spring.dao.NoticeDAOImpl"
+		p:session-ref="session" />
+	<bean id="noticeService" class="com.ssafy.spring.service.NoticeServiceImpl" p:noticeDao-ref="noticeDao" />
+
 </beans>
