@@ -1,7 +1,9 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="com.ssafy.spring.vo.User" %>
 
 <html>
 <head>
@@ -133,12 +135,10 @@ html, body, h1, h2, h3, h4, h5, h6 {
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">
-						<i
-							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취
-						목록
+						<i class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취 목록
 					</h2>
 					<c:choose>
-						<c:when test="${not empty user.user_allergy}">
+						<c:when test="${not empty user.user_eatlist}">
 							<c:forEach items="${user.user_eatlist}" var="eat">
 								<div class="w3-container">
 									<input id="code" type="hidden" value="${eat}">
@@ -152,11 +152,48 @@ html, body, h1, h2, h3, h4, h5, h6 {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-					해당 내용이 존재하지 않습니다.
-				</c:otherwise>
+							해당 내용이 존재하지 않습니다.
+						</c:otherwise>
 					</c:choose>
 				</div>
 				<!-- End Right Column -->
+			</div>
+			
+			<div class="w3-twothird">
+
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">
+						<i class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>찜 목록
+					</h2>
+					<%
+						String likelist = ((User) request.getAttribute("user")).getUser_likelist();
+						String[] likelists = likelist.split("/");
+						ArrayList<String> likes = new ArrayList<>();
+						for(String l: likelists) {
+							if(l.contains("-Y"))
+								likes.add(l.split("-")[0]);
+						}
+						pageContext.setAttribute("likes", likes);
+					%>
+					<c:choose>
+						<c:when test="${not empty likes}">
+							<c:forEach items="${likes}" var="like">
+								<div class="w3-container">
+									<input id="code" type="hidden" value="${like}">
+									<h3 class="w3-opacity">
+										<b>${like}</b>
+									</h3>
+									<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
+									<!--  <p>${food.material}</p>-->
+									<hr>
+								</div>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							해당 내용이 존재하지 않습니다.
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 
 			<!-- End Grid -->
