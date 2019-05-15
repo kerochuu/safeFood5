@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `safefood`.`food` (
   `food_material` VARCHAR(2000) NULL DEFAULT NULL,
   `food_image` VARCHAR(150) NULL DEFAULT NULL,
   `food_allergy` VARCHAR(1000) NULL DEFAULT NULL,
+  `food_count` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`food_code`, `food_name`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
