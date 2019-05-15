@@ -22,17 +22,17 @@
 	<main>
 	<div class="jumbotron text-center">
 		<div class="search-box">
-			<form action="${pageContext.request.contextPath}/food/detail.do"
+			<form action="${pageContext.request.contextPath}/food/list.do"
 				method="post" class="form-inline search-form">
 				<select name="method" id="category" class="form-control">
 					<option value="searchByName">제품명</option>
 					<option value="searchByMaker">제조사</option>
 					<option value="searchByMaterial">원재료</option>
 					<option value="searchByAllergy">알러지</option>
-				</select> <input type="hidden" name="action" value="food"> <input
-					name="key" id="keyword" class="form-control" type="text"> <input
-					type="submit" id="search" class="btn btn-default btn-safe"
-					value="검색">
+				</select>
+				<input type="hidden" name="action" value="food">
+				<input name="key" id="keyword" class="form-control" type="text">
+				<input type="submit" id="search" class="btn btn-default btn-safe" value="검색">
 			</form>
 		</div>
 	</div>

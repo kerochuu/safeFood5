@@ -25,16 +25,34 @@ public class FoodController {
 		this.foodService = foodService;
 	}
 	
-	/*@GetMapping("/searchByName")
-	public String searchByName(String name, Model model) {
-		model.addAttribute("foodList", foodService.selectFoodByName(name));
-		return "SearchPage";
-	}*/
-	
 	
 	@PostMapping("/list.do")
 	public String getFoodList(Model model) {
 		model.addAttribute("foodList", foodService.selectFoodList());
+		return "SearchPage";
+	}
+	
+	@PostMapping("/searchByName.do")
+	public String searchByName(String key, Model model) {
+		model.addAttribute("foodList", foodService.selectFoodByName(key));
+		return "SearchPage";
+	}
+	
+	@PostMapping("/searchByMaker.do")
+	public String searchByMaker(String key, Model model) {
+		model.addAttribute("foodList", foodService.selectFoodByMaker(key));
+		return "SearchPage";
+	}
+	
+	@PostMapping("/searchByMaterial.do")
+	public String searchByMaterial(String key, Model model) {
+		model.addAttribute("foodList", foodService.selectFoodByMaterial(key));
+		return "SearchPage";
+	}
+	
+	@PostMapping("/searchByAllergy.do")
+	public String searchByAllergy(String key, Model model) {
+		model.addAttribute("foodList", foodService.selectFoodByAllergy(key));
 		return "SearchPage";
 	}
 	
@@ -49,10 +67,10 @@ public class FoodController {
 		return "MainPage";
 	}
 	
-	@GetMapping("/SearchPage.do")
-	public String getSearchPage(Model model) {
-		model.addAttribute("foodList", foodService.selectFoodList());
-		return "SearchPage";
-	}
+//	@GetMapping("/SearchPage.do")
+//	public String getSearchPage(Model model) {
+//		model.addAttribute("foodList", foodService.selectFoodList());
+//		return "SearchPage";
+//	}
 
 }
