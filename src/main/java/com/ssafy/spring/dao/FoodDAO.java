@@ -10,8 +10,21 @@ public interface FoodDAO {
 	Food selectFood(int code);
 
 	List<Food> selectFoodList();
+	
+	List<Food> selectFoodByName(String key);
 
-	List<Food> selectFoodWithMultiCondition(HashMap<String, Object> conditions);
+	List<Food> selectFoodByMaker(String key);
 
-	List<Food> selectFoodByCodes(int[] codes);
+	List<Food> selectFoodByMaterial(String key);
+
+	List<Food> selectFoodByAllergy(String key);
+
+//	List<Food> selectFoodWithMultiCondition(HashMap<String, Object> conditions);
+
+//	List<Food> selectFoodByCodes(int[] codes);
+	
+	void plusSearchCount(int food_code);
+
+	List<Food> selectBestFood();
+	
 }

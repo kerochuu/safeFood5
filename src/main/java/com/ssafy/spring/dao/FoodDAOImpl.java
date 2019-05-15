@@ -25,17 +25,45 @@ public class FoodDAOImpl implements FoodDAO {
 	public List<Food> selectFoodList() {
 		return session.selectList("food.selectFoodList");
 	}
-
+	
 	@Override
-	public List<Food> selectFoodWithMultiCondition(HashMap<String, Object> conditions) {
-		return session.selectList("food.selectFoodWithMultiCondition", conditions);
+	public List<Food> selectFoodByName(String key) {
+		return session.selectList("food.selectFoodListByName", key);
 	}
 
 	@Override
-	public List<Food> selectFoodByCodes(int[] idList) {
-		return session.selectList("food.selectFoodByIds", idList);
+	public List<Food> selectFoodByMaker(String key) {
+		return session.selectList("food.selectFoodListByMaker", key);
 	}
 
+	@Override
+	public List<Food> selectFoodByMaterial(String key) {
+		return session.selectList("food.selectFoodListByMaterial", key);
+	}
 
+	@Override
+	public List<Food> selectFoodByAllergy(String key) {
+		return session.selectList("food.selectFoodListByAllergy", key);
+	}
 
+//	@Override
+//	public List<Food> selectFoodWithMultiCondition(HashMap<String, Object> conditions) {
+//		return session.selectList("food.selectFoodWithMultiCondition", conditions);
+//	}
+
+//	@Override
+//	public List<Food> selectFoodByCodes(int[] idList) {
+//		return session.selectList("food.selectFoodByIds", idList);
+//	}
+
+	@Override
+	public void plusSearchCount(int food_code) {
+		session.update("food.plusSearchCount", food_code);
+	}
+
+	@Override
+	public List<Food> selectBestFood() {
+		return session.selectList("food.selectBestFood");
+	}
+	
 }

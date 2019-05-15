@@ -35,6 +35,7 @@ public class Food {
 	/**이미지 경로*/
 	protected String food_image;
 	protected String food_allergy;
+	protected int food_count;
 	
 	
 	public Food() {	}
@@ -42,7 +43,7 @@ public class Food {
 	public Food(int food_code, String food_name, double serving_wt, double nutr_cont1, double nutr_cont2,
 			double nutr_cont3, double nutr_cont4, double nutr_cont5, double nutr_cont6, double nutr_cont7,
 			double nutr_cont8, double nutr_cont9, String food_maker, String food_material, String food_image,
-			String food_allergy) {
+			String food_allergy, int food_count) {
 		super();
 		this.food_code = food_code;
 		this.food_name = food_name;
@@ -60,6 +61,7 @@ public class Food {
 		this.food_material = food_material;
 		this.food_image = food_image;
 		this.food_allergy = food_allergy;
+		this.food_count = food_count;
 	}
 
 	
@@ -190,6 +192,14 @@ public class Food {
 	public void setFood_allergy(String food_allergy) {
 		this.food_allergy = food_allergy;
 	}
+	
+	public int getFood_count() {
+		return food_count;
+	}
+
+	public void setFood_count(int food_count) {
+		this.food_count = food_count;
+	}
 
 	
 	@Override
@@ -199,7 +209,7 @@ public class Food {
 				+ ", nutr_cont4=" + nutr_cont4 + ", nutr_cont5=" + nutr_cont5 + ", nutr_cont6=" + nutr_cont6
 				+ ", nutr_cont7=" + nutr_cont7 + ", nutr_cont8=" + nutr_cont8 + ", nutr_cont9=" + nutr_cont9
 				+ ", food_maker=" + food_maker + ", food_material=" + food_material + ", food_image=" + food_image
-				+ ", food_allergy=" + food_allergy + "]";
+				+ ", food_allergy=" + food_allergy + ", food_count=" + food_count + "]";
 	}
 	
 }

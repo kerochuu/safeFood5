@@ -26,20 +26,46 @@ public class FoodServiceImpl implements FoodService{
 	public List<Food> selectFoodList() {
 		return foodDao.selectFoodList();
 	}
-
+	
 	@Override
-	public List<Food> selectFoodWithMultiCondition(HashMap<String, Object> conditions) {
-		return foodDao.selectFoodWithMultiCondition(conditions);
+	public List<Food> selectFoodByName(String key) {
+		return foodDao.selectFoodByName(key);
 	}
 
 	@Override
-	public List<Food> selectFoodByCodes(int[] codes) {
-		return foodDao.selectFoodByCodes(codes);
+	public List<Food> selectFoodByMaker(String key) {
+		return foodDao.selectFoodByMaker(key);
 	}
 
+	@Override
+	public List<Food> selectFoodByMaterial(String key) {
+		return foodDao.selectFoodByMaterial(key);
+	}
 
+	@Override
+	public List<Food> selectFoodByAllergy(String key) {
+		return foodDao.selectFoodByAllergy(key);
+	}
 
+//	@Override
+//	public List<Food> selectFoodWithMultiCondition(HashMap<String, Object> conditions) {
+//		return foodDao.selectFoodWithMultiCondition(conditions);
+//	}
 
+//	@Override
+//	public List<Food> selectFoodByCodes(int[] codes) {
+//		return foodDao.selectFoodByCodes(codes);
+//	}
+	
+	@Override
+	public void plusSearchCount(int food_code) {
+		foodDao.plusSearchCount(food_code);
+	}
+
+	@Override
+	public List<Food> selectBestFood() {
+		return foodDao.selectBestFood();
+	}
 	
 	
 }

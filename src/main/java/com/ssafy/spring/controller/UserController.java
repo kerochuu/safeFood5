@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ssafy.spring.service.FoodService;
 import com.ssafy.spring.service.UserService;
 import com.ssafy.spring.vo.User;
 
@@ -24,16 +25,22 @@ import com.ssafy.spring.vo.User;
 public class UserController {
 
 	UserService userService;
+	FoodService foodService;
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	@Autowired
+	public void setFoodService(FoodService foodService) {
+		this.foodService = foodService;
+	}
 	
 	@PostMapping("/login.do")
-	public String login(HttpSession session,String id,String pw) {
+	public String login(HttpSession session,String id,String pw, Model model) {
 		User user = userService.searchById(id);
 		if(user!=null && user.getUser_pw().equals(pw)) {
-			session.setAttribute("userId", id);			
+			session.setAttribute("userId", id);
+			model.addAttribute("bestfood", foodService.selectBestFood());
 			return "MainPage";
 		}
 		
