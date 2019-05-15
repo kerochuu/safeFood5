@@ -45,8 +45,6 @@ public class FoodController {
 				model.addAttribute("foodList", foodService.selectFoodByMaterial(keyword));
 			else if(category.equals("searchByAllergy"))
 				model.addAttribute("foodList", foodService.selectFoodByAllergy(keyword));
-			else
-				System.out.println("엘렐렐레ㅔ레레ㅔㄹ레렐레ㅔ");
 		}
 		return "SearchPage";
 	}
@@ -84,7 +82,6 @@ public class FoodController {
 	
 	@GetMapping("/main.do")
 	public String getMain(Model model) {
-		System.out.println("selectBestFood 실행한다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
 		model.addAttribute("bestfood", foodService.selectBestFood());
 		return "MainPage";
 	}
