@@ -113,7 +113,7 @@
 	        <div class="nutrition-info">
 	        	<%
 					String material = ((Food) request.getAttribute("food")).getFood_material();
-					String[] countrys = {"국산", "국내산", "호주", "미국", "독일", "말레이시아", "뉴질랜드", "중국", "에티오피아", "콜롬비아", "브라질"};
+					String[] countrys = {"국산", "국내산", "호주", "미국", "독일", "말레이시아", "뉴질랜드", "중국", "캐나다", "에티오피아", "콜롬비아", "브라질"};
 					HashMap<String, Integer> country_count = new HashMap<String, Integer>();
 					for(String country: countrys) {
 						int count = StringUtils.countOccurrencesOf(material, country); // material에 country가 몇 번 나오는지
@@ -266,6 +266,7 @@
                     	'${country_count["말레이시아"]}',
                     	'${country_count["뉴질랜드"]}',
                     	'${country_count["중국"]}',
+                    	'${country_count["캐나다"]}',
                     	'${country_count["에티오피아"]}',
                     	'${country_count["콜롬비아"]}',
                     	'${country_count["브라질"]}'
@@ -279,6 +280,7 @@
                         '#f53794',
                         '#537bc4',
                         '#acc236',
+                        '#CC3D3D', // 빨간색
                         '#166a8f',
                         '#00a950',
                         '#58595b'
@@ -294,6 +296,7 @@
                     '말레이시아',
                     '뉴질랜드',
                     '중국',
+                    '캐나다',
                     '에티오피아',
                     '콜롬비아',
                     '브라질'
