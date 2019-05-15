@@ -53,7 +53,7 @@
 					    <input type="text" class="form-control" name="user_address" >
 					   </label>
 					    <br/>
-				</div>	
+					</div>	
 				
 					<div style ="float:left;">
 					    알레르기 <hr/>

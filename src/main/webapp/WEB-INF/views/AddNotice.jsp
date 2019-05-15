@@ -22,55 +22,61 @@
 	<main>
 	<div class="jumbotron text-center">
 		<div class="search-box">
-			<form action="${pageContext.request.contextPath}/notice/detailNotice.do"
+			<form
+				action="${pageContext.request.contextPath}/notice/detailNotice.do"
 				method="post" class="form-inline search-form">
-				 <input type="hidden" name="action" value="notice"> <input
+				<input type="hidden" name="action" value="notice"> <input
 					name="key" id="keyword" class="form-control" type="text"> <input
 					type="submit" id="search-notice" class="btn btn-default btn-safe"
 					value="검색">
 			</form>
 		</div>
 	</div>
-	 <div class="contents">
+	<div class="contents">
 		<div class="item-group">
 
-			<c:choose>
-				<c:when test="${not empty NoticeList}">
-					<c:forEach items="${NoticeList}" var="notice">
-						<hr />
-						<div id="item" class="item">
-							<input id="code" type="hidden" value="${notice.notice_code}">
-							<div class="product-info">
-							
-								<div class="info-block">
-									<div class="product-title">
-										<h3 id="title"><a href = "${pageContext.request.contextPath}/notice/selectNotice.do?notice_code=${notice.notice_code}">${notice.notice_title}</a></h3>
-										<p id="date">${notice.notice_date}</p>
-									</div>
-									
-								</div>
-							</div>
+			<div id="item" class="item">
+				<div class="product-info">
+					<div class="info-block">
+						<div class="product-title">
+
+							<label for="notice_title">제목 <input id="notice_title"
+								type="text" class="form-control" name="notice_title"
+								required="required"></label> <br /> <label> 내용 <textarea
+									class="form-control" name="notice_content">
+					     </textarea>
+							</label> <br />
 						</div>
-						
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<td colspan="5">공지사항이 없습니다.</td>
-					</tr>
-				</c:otherwise>
-				
-				<%-- <c:when test="${session.getAttribute("userId")} = 1"> --%>
-				
-					
-				<%-- </c:when> --%>
-			</c:choose>
-				
+
+						<br />
+
+
+
+
+
+
+					</div>
+
+
+				</div>
+			</div>
+
+
+			<%-- <c:when test="${session.getAttribute("userId")} = 1"> --%>
+
+
+			<%-- </c:when> --%>
+
 		</div>
-		</div>
-		<div class="btn-set">
-			<a href="${pageContext.request.contextPath}/notice/addNotice.do"><button type="button" class="btn btn-primary">공지사항 추가</button></a>　
-		</div>
+	</div>
+	<div class="btn-set">
+		<a href="${pageContext.request.contextPath}/notice/insertNotice.do"><button
+				type="submit" class="btn btn-primary">공지사항 등록</button></a> <a
+			href="${pageContext.request.contextPath}/notice/insertNotice.do"><button
+				id="reset" type="button" class="btn btn-block">취소</button></a>
+
+	</div>
+
 	</main>
 	<jsp:include page="Footer.jsp" />
 </body>
