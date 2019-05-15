@@ -23,4 +23,7 @@ public interface UserService {
 	void addEatList(User user);
 
 	void addLikeList(User user);
+	
+	User getUser(String user_id);
+	User getUser_jjim(String user_id);
 }

@@ -60,5 +60,15 @@ public class UserDAOImpl implements UserDAO {
 		return session.delete("user.deleteInfo", user_id);
 	}
 
+	@Override
+	public User getUser(String user_id) {
+		return session.selectOne("user.getUserWithEats", user_id);
+	}
+
+	@Override
+	public User getUser_jjim(String user_id) {
+		return session.selectOne("user.getUserWithJjims", user_id);
+	}
+
 
 }

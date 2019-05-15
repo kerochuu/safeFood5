@@ -146,7 +146,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 							<c:forEach items="${user.list}" var="temp">
 								<div class="w3-container">
 									<h3 class="w3-opacity">
-										<b>${temp.eat_food_name}</b>
+										<b>${temp.jjim_food_name}</b>
 									</h3>
 									<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
 									<!--  <p>${food.material}</p>-->
@@ -161,8 +161,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				</div>
 				<!-- End Right Column -->
 				<div>
-					<button id="jjim" type="submit"
-						class="form-control btn btn-block btn-primary">찜목록</button>
+					<button id="eat" type="submit"
+						class="form-control btn btn-block btn-primary">섭취목록</button>
 					<button id="jjim" type="submit"
 						class="form-control btn btn-block btn-primary">알레르기정보</button>
 					
@@ -224,10 +224,10 @@ $("#delete-Info")
 		function() {
 			location.href = "${pageContext.request.contextPath}/user/deleteInfo.do";
 		});
-$("#jjim")
+$("#eat")
 .click(
 		function() {
-			location.href = "${pageContext.request.contextPath}/user/userinfo_jjim.do";
+			location.href = "${pageContext.request.contextPath}/user/userinfo.do";
 		});
 </script>
 </html>

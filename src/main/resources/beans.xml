@@ -36,4 +36,8 @@
 		p:session-ref="session" />
 	<bean id="noticeService" class="com.ssafy.spring.service.NoticeServiceImpl" p:noticeDao-ref="noticeDao" />
 
+	<bean id="eatDao" class="com.ssafy.spring.dao.EatDAOImpl"
+		p:session-ref="session" />
+	<bean id="eatService" class="com.ssafy.spring.service.EatServiceImpl" p:eatDao-ref="eatDao" />
+	
 </beans>

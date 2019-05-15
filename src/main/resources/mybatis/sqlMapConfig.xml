@@ -13,6 +13,8 @@
 		<typeAlias type="com.ssafy.spring.vo.Food" alias="Food"/> 
 		<typeAlias type="com.ssafy.spring.vo.User" alias="User"/> 
 		<typeAlias type="com.ssafy.spring.vo.Notice" alias="Notice"/> 
+		<typeAlias type="com.ssafy.spring.vo.Eat" alias="Eat"/> 
+		<typeAlias type="com.ssafy.spring.vo.Jjim" alias="Jjim"/> 
 	</typeAliases>
 
 	<mappers>
@@ -20,5 +22,8 @@
 		<mapper resource="mapper/Food.xml"/>
 		<mapper resource="mapper/User.xml"/>
 		<mapper resource="mapper/Notice.xml"/>
+		<mapper resource="mapper/Eat.xml"/>
+		<mapper resource="mapper/Jjim.xml"/>
+		
 	</mappers>
 </configuration>  

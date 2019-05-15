@@ -67,6 +67,16 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public User getUser(String user_id) {
+		return userDao.getUser(user_id);
+	}
+
+	@Override
+	public User getUser_jjim(String user_id) {
+		return userDao.getUser_jjim(user_id);
+	}
+
 
 
 }

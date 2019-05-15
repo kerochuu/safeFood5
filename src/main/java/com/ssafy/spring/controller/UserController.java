@@ -93,11 +93,7 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 	
-	@GetMapping("/addEatList.do")
-	public String addEatList(/*@PathVariable*/ String user_id, String eatList) {
-		userService.addEatList(new User(user_id, eatList));
-		return "redirect:/food/SearchPage.do";
-	}
+
 	
 	@GetMapping("/addLikeList.do")
 	public String addLikeList(String user_id, String likeNum) {
@@ -120,8 +116,14 @@ public class UserController {
 	
 	@GetMapping("/userinfo.do")
 	public String serchById(HttpSession session, Model model) {
-		model.addAttribute("user", userService.searchById((String) session.getAttribute("userId")));
+		model.addAttribute("user", userService.getUser((String) session.getAttribute("userId")));
 		return "MyPage";
+	}
+	
+	@GetMapping("/userinfo_jjim.do")
+	public String serchById2(HttpSession session, Model model) {
+		model.addAttribute("user", userService.getUser_jjim((String) session.getAttribute("userId")));
+		return "MyPage_jjim";
 	}
 	
 	

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jjim">
+
+	<resultMap type="Jjim" id="JjimResultMap">
+		<id column="jjim_code" property="jjim_code"/>
+		<result column="jjim_user_code" property="jjim_user_code"/>
+		<result column="jjim_food_code" property="jjim_food_code"/>
+	</resultMap>
+	<!-- <select id="searchId" resultType="Notice" parameterType="String">
+		select Notice_id, Notice_pw, Notice_name, Notice_phone, Notice_address, Notice_jjimlist, Notice_allergy
+	</select> -->
+
+	<select id="selectId" resultType="Jjim" parameterType="int">
+		select jjim_code, jjim_user_code,  jjim_food_code
+		from jjim
+		where jjim_code=#{jjim_code}
+	</select>
+	
+	<select id="selectList_jjim" resultMap="JjimResultMap" parameterType="int">
+		select jjim_code, jjim_user_code, jjim_food_code
+		from jjim
+		where jjim_code={#jjim_code};
+	</select>
+	
+
+	<insert id="insertjjim" parameterType="Jjim">
+		insert into notice( jjim_user_code, jjim_food_code)
+		values( #{jjim_user_code}, #{jjim_food_code})
+		
+		
+	</insert>
+	
+<!-- 	
+	<update id="updatejjim" parameterType="jjim">
+		update 	jjim
+		set 	jjim_user_code = #{jjim_user_code}
+				notice_content = #{notice_content}
+				notice_date = #{notice_date}
+		where 	Notice_code = #{notice_code}
+	</update> -->
+
+
+	<delete id="deletejjim" parameterType="int">
+		delete  from jjim
+		where   jjim_code = #{jjim_code}
+	</delete>
+
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

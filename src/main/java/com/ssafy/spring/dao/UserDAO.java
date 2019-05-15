@@ -24,4 +24,7 @@ public interface UserDAO {
 
 	void addLikeList(User user);
 
+	User getUser(String user_id);
+	
+	User getUser_jjim(String user_id);
 }

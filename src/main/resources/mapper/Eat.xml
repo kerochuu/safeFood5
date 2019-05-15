@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="eat">
+
+	<resultMap type="Eat" id="EatResultMap">
+		<id column="eat_code" property="eat_code"/>
+		<result column="eat_user_code" property="eat_user_code"/>
+		<result column="eat_food_code" property="eat_food_code"/>
+	</resultMap>
+	<!-- <select id="searchId" resultType="Notice" parameterType="String">
+		select Notice_id, Notice_pw, Notice_name, Notice_phone, Notice_address, Notice_eatlist, Notice_allergy
+	</select> -->
+
+	<select id="selectId" resultType="Eat" parameterType="int">
+		select eat_code, eat_user_code, eat_food_code
+		from eat
+		where eat_code=#{eat_code}
+	</select>
+	
+	<select id="selectList_eat" resultMap="EatResultMap" parameterType="int">
+		select eat_code, eat_user_code, eat_food_code
+		from eat
+		where eat_code={#eat_code} AND eat_flag = 0;
+	</select>
+	
+	<select id="selectList_like" resultMap="EatResultMap" parameterType="int">
+		select eat_code, eat_user_code, eat_food_code
+		from eat
+		where eat_code={#eat_code} AND eat_flag = 1;
+	</select>
+
+
+	<insert id="insertEat" parameterType="Eat">
+		insert into notice( eat_user_code, eat_food_code, eat_food_name)
+		values( #{eat_user_code}, #{eat_food_code}, #{eat_food_name})
+		
+		
+	</insert>
+	
+<!-- 	
+	<update id="updateEat" parameterType="Eat">
+		update 	eat
+		set 	eat_user_code = #{eat_user_code}
+				notice_content = #{notice_content}
+				notice_date = #{notice_date}
+		where 	Notice_code = #{notice_code}
+	</update> -->
+
+
+	<delete id="deleteEat" parameterType="int">
+		delete  from eat
+		where   eat_code = #{eat_code}
+	</delete>
+
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

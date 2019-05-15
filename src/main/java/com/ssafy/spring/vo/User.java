@@ -1,5 +1,7 @@
 package com.ssafy.spring.vo;
 
+import java.util.List;
+
 public class User {
 	int user_Code;
 	String user_id, user_pw, user_name;
@@ -9,6 +11,32 @@ public class User {
 	String user_allergy;
 	String allergy;
 	String user_likelist;
+	
+	List<Eat> list;
+
+	public List<Eat> getList() {
+		return list;
+	}
+
+	public void setList(List<Eat> list) {
+		this.list = list;
+	}
+
+	public User(int user_Code, String user_id, String user_pw, String user_name, String user_phone, String user_address,
+			String user_eatlist, String user_allergy, String allergy, String user_likelist, List<Eat> list) {
+		super();
+		this.user_Code = user_Code;
+		this.user_id = user_id;
+		this.user_pw = user_pw;
+		this.user_name = user_name;
+		this.user_phone = user_phone;
+		this.user_address = user_address;
+		this.user_eatlist = user_eatlist;
+		this.user_allergy = user_allergy;
+		this.allergy = allergy;
+		this.user_likelist = user_likelist;
+		this.list = list;
+	}
 
 	public User() {	}
 	
@@ -116,7 +144,7 @@ public class User {
 		return "User [user_Code=" + user_Code + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
 				+ user_name + ", user_phone=" + user_phone + ", user_address=" + user_address + ", user_eatlist="
 				+ user_eatlist + ", user_allergy=" + user_allergy + ", allergy=" + allergy + ", user_likelist="
-				+ user_likelist + "]";
+				+ user_likelist + ", list=" + list + "]";
 	}
 
 }

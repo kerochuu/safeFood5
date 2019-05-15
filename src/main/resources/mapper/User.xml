@@ -65,12 +65,76 @@
 		where user_id = #{user_id}
 	</update>
 	
-	<update id="addLikeList" parameterType="User">
-		update user
-		set user_likelist = #{user_likelist}
-		where user_code = #{user_Code}
-	</update>
 	
+	
+	<select id="getUser" resultMap="UserResultMap" parameterType="String">
+		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
+		from user
+		where user_id = #{user_id}
+	</select>
+	
+	<resultMap type="User" id="UserResultMap">
+		<id column="user_code" property="user_code" />
+		<result column="user_id" property="user_id"/>
+		<result column="user_pw" property="user_pw"/>
+		<result column="user_name" property="user_name"/>
+		<result column="user_phone" property="user_phone"/>
+		<result column="user_address" property="user_address"/>
+		<result column="user_allergy" property="user_allergy"/>
+	</resultMap>
+	
+	<resultMap type="Eat" id="EatResultMap">
+		<id column="eat_code" property="eat_code"/>
+		<result column="eat_user_code" property="eat_user_code"/>
+		<result column="eat_food_code" property="eat_food_code"/>		
+		<result column="eat_food_name" property="eat_food_name"/>		
+	</resultMap>
+	
+
+	
+	<resultMap type="User" id="UserJoinResultMap" extends="UserResultMap">
+		<!-- 1대 다 -->
+		<collection property="list" resultMap="EatResultMap"/>
+	</resultMap>
+	
+	<select id="getUserWithEats" parameterType="String" resultMap="UserJoinResultMap">
+		select user_id, user_pw, user_name, user_phone, user_address, user_allergy,
+	 		  eat_code, eat_user_code, eat_food_code, eat_food_name
+		from  `user`
+		left outer join eat on (user_code = eat_user_code)
+		where user_id = #{user_id}
+	</select>
+	
+	
+	
+	<select id="getUser_jjim" resultMap="UserResultMap" parameterType="String">
+		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
+		from user
+		where user_id = #{user_id}
+	</select>
+	
+
+	<resultMap type="Jjim" id="JjimResultMap">
+		<id column="jjim_code" property="jjim_code"/>
+		<result column="jjim_user_code" property="jjim_user_code"/>
+		<result column="jjim_food_code" property="jjim_food_code"/>		
+		<result column="jjim_food_name" property="jjim_food_name"/>		
+	</resultMap>
+	
+
+	
+	<resultMap type="User" id="UserJoinResultMap_Jjim" extends="UserResultMap">
+		<!-- 1대 다 -->
+		<collection property="list" resultMap="JjimResultMap"/>
+	</resultMap>
+	
+	<select id="getUserWithJjims" parameterType="String" resultMap="UserJoinResultMap_Jjim">
+		select user_id, user_pw, user_name, user_phone, user_address, user_allergy,
+	 		  jjim_code, jjim_user_code, jjim_food_code, jjim_food_name
+		from  `user`
+		left outer join jjim on (user_code = jjim_user_code)
+		where user_id = #{user_id}
+	</select>
 </mapper>
 
 
