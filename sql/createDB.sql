@@ -53,9 +53,7 @@ CREATE TABLE IF NOT EXISTS `safefood`.`user` (
   `user_name` VARCHAR(45) NULL DEFAULT NULL,
   `user_phone` VARCHAR(45) NULL DEFAULT NULL,
   `user_address` VARCHAR(100) NULL DEFAULT NULL,
-  `user_eatlist` VARCHAR(100) NULL DEFAULT NULL,
   `user_allergy` VARCHAR(500) NULL DEFAULT NULL,
-  `user_likelist` VARCHAR(400) NULL DEFAULT NULL,
   PRIMARY KEY (`user_code`, `user_id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 10
