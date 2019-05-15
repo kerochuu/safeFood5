@@ -25,6 +25,13 @@ public class FoodController {
 		this.foodService = foodService;
 	}
 	
+	/*@GetMapping("/searchByName")
+	public String searchByName(String name, Model model) {
+		model.addAttribute("foodList", foodService.selectFoodByName(name));
+		return "SearchPage";
+	}*/
+	
+	
 	@PostMapping("/list.do")
 	public String getFoodList(Model model) {
 		model.addAttribute("foodList", foodService.selectFoodList());

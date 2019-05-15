@@ -1,7 +1,11 @@
+<%@page import="org.springframework.util.StringUtils"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.ssafy.spring.vo.Food" %>
 
 <html>
 	<head>
@@ -11,19 +15,20 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 	    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
 	    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
+	    <script src="https://unpkg.com/vue"></script>
 	    <script src="${pageContext.request.contextPath}/resources/js/Chart.bundle.min.js"></script>
 	    <script src="${pageContext.request.contextPath}/resources/js/utils.js"></script>
 	</head>
 <body>
 	<jsp:include page="Header.jsp" />
-		<main>
-			<form action="${pageContext.request.contextPath}/food/list.do" method="post">
+	<main>
+		<form action="${pageContext.request.contextPath}/food/list.do" method="post">
 	    	<h2 class="title-sub">제품정보</h2>
 	    	<button id="add" type="submit" class="btn btn-primary">추가</button>
-	    	</form>
-	    <hr>
-	    <div id="productInfo" class="contents">
-	        <div class="product-info">
+		</form>
+		<hr>
+		<div id="productInfo" class="contents">
+	    	<div class="product-info">
 	        	<div class="info-block">
             		<img src="${pageContext.request.contextPath}/resources/${food.food_image}">
             	</div>
@@ -32,10 +37,10 @@
             			<h3 id="name">${food.food_name}</h3>
             			<p id="maker">${food.food_maker}</p>
             		</div>
-            		<div class="product-ingredient">
-            			<p id="ingredient">${food.food_material}</p>
-            		</div>
-		            <div id="allergy">
+            	<div class="product-ingredient">
+            		<p id="ingredient">${food.food_material}</p>
+            	</div>
+		        <div id="allergy">
 		            <c:choose>
 		            	<c:when test="${not empty food.food_allergy}">
 		            		<c:forEach items="${food.food_allergy}" var="allergy">
@@ -47,6 +52,7 @@
     			</div>
 			</div>
 		</div>
+		
 	    <h2 class="title-sub">영양정보</h2>
 	    <hr>
 	    <div class="contents">
@@ -96,6 +102,38 @@
 	                        <th>트렌스지방</th>
 	                        <td>${food.nutr_cont9}</td>
 	                    </tr>
+	                </table>
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <h2 class="title-sub">원산지 정보</h2>
+	    <hr>
+	    <div class="contents">
+	        <div class="country-info">
+	        	<%
+					String material = ((Food) request.getAttribute("food")).getFood_material();
+					String[] countrys = {"국산", "국내산", "호주", "미국", "독일", "말레이시아", "뉴질랜드", "중국", "에티오피아", "콜롬비아", "브라질"};
+					HashMap<String, Integer> country_count = new HashMap<String, Integer>();
+					for(String country: countrys) {
+						int count = StringUtils.countOccurrencesOf(material, country); // material에 country가 몇 번 나오는지
+						if(count > 0)
+							country_count.put(country, count);
+					}
+					System.out.println(country_count.toString());
+					pageContext.setAttribute("country_count", country_count);
+				%>
+	        
+	            <div class="info-block2">
+	                <canvas id="chart-area2" width="400" height="400" class="chartjs-render-monitor" style="display: block; width: 372px; height: 186px;"></canvas>
+	            </div>
+	            <div class="info-block2">
+	                <table class="table">
+	                	<tr v-for="(val, key) in country_count" :value="key">
+							<th v-text="{{key}}" />
+							<td v-text="{{val}}" />
+							<!-- <td>{{val}}</td> -->
+						</tr>
 	                </table>
 	            </div>
 	        </div>
