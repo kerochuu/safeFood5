@@ -61,6 +61,11 @@ public class FoodServiceImpl implements FoodService{
 	public void plusSearchCount(int food_code) {
 		foodDao.plusSearchCount(food_code);
 	}
+
+	@Override
+	public List<Food> selectBestFood() {
+		return foodDao.selectBestFood();
+	}
 	
 	
 }

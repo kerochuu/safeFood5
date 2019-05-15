@@ -24,4 +24,6 @@ public interface FoodService {
 	
 	void plusSearchCount(int food_code);
 	
+	List<Food> selectBestFood();
+	
 }

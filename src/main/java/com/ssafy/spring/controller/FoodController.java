@@ -83,7 +83,9 @@ public class FoodController {
 	}
 	
 	@GetMapping("/main.do")
-	public String getMain() {
+	public String getMain(Model model) {
+		System.out.println("selectBestFood 실행한다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+		model.addAttribute("bestfood", foodService.selectBestFood());
 		return "MainPage";
 	}
 	

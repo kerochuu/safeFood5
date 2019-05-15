@@ -64,7 +64,7 @@
 		where 	food_code = #{food_code}
 	</update>
 	
-	<select id="selectBestSearch">
+	<select id="selectBestFood" resultMap="FoodResultMap">
 		select		food_name, food_maker, food_count
 		from		food
 		where		food_count>0

@@ -18,6 +18,7 @@
 	        <div id="logo">
 	            <h1><span class="safe-text" style="color: rgb(60, 144, 226);">Safe</span> Food For You</h1>
 	        </div>
+	        
 	        <div class="search-box">
 	            <form action="${pageContext.request.contextPath}/food/list.do" method="post" class="form-inline search-form">
 	            	<select key="category" name="category" id="category" class="form-control">
@@ -30,6 +31,25 @@
 	                <input name="keyword" id="keyword" class="form-control" type="text">
 	                <input type="submit" id="search" class="btn btn-default btn-safe" style="background-color:  rgb(60, 144, 226);" value="검색">
 	            </form>
+	        </div>
+	        
+	        <div align="center"> <!-- 검색어 히스토리 혹은 베스트 검색어 올 곳 -->
+	        </div>
+	        
+	        <div align="center">
+	        	<h1 class="safe-text" style="color: rgb(60, 144, 226);">베스트 식품</h1>
+	        	<table>
+	        		<tr>
+	        			<th>식품명</th> <th>제조사</th> <th>조회수</th>
+	        		</tr>
+	        		<c:forEach items="${bestfood}" var="food">
+		            	<tr>
+		            		<th>${food.food_name}</th>
+		            		<td align="right">${food.food_maker}</td>
+		            		<td align="right">${food.food_count}</td>
+		            	</tr>
+		            </c:forEach>
+	        	</table>
 	        </div>
 	    </div>
 	</main>

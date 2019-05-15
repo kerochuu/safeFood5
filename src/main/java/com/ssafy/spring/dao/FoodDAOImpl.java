@@ -60,5 +60,10 @@ public class FoodDAOImpl implements FoodDAO {
 	public void plusSearchCount(int food_code) {
 		session.update("food.plusSearchCount", food_code);
 	}
+
+	@Override
+	public List<Food> selectBestFood() {
+		return session.selectList("food.selectBestFood");
+	}
 	
 }
