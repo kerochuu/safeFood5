@@ -110,7 +110,7 @@
 	    <h2 class="title-sub">원산지 정보</h2>
 	    <hr>
 	    <div class="contents">
-	        <div class="country-info">
+	        <div class="nutrition-info">
 	        	<%
 					String material = ((Food) request.getAttribute("food")).getFood_material();
 					String[] countrys = {"국산", "국내산", "호주", "미국", "독일", "말레이시아", "뉴질랜드", "중국", "에티오피아", "콜롬비아", "브라질"};
@@ -124,16 +124,22 @@
 					pageContext.setAttribute("country_count", country_count);
 				%>
 	        
-	            <div class="info-block2">
+	            <div class="info-block">
 	                <canvas id="chart-area2" width="400" height="400" class="chartjs-render-monitor" style="display: block; width: 372px; height: 186px;"></canvas>
 	            </div>
-	            <div class="info-block2">
+	            <div class="info-block">
 	                <table class="table">
-	                	<tr v-for="(val, key) in country_count" :value="key">
+	                	<!-- <tr v-for="(val, key) in country_count" :value="key">
 							<th v-text="{{key}}" />
 							<td v-text="{{val}}" />
-							<!-- <td>{{val}}</td> -->
-						</tr>
+							<td>{{val}}</td>
+						</tr> -->
+						<c:forEach items="${country_count}" var="c">
+		            		<tr>
+		            			<th>${c.key}</td>
+		            			<td>${c.value}</td>
+		            		</tr>
+		            	</c:forEach>
 	                </table>
 	            </div>
 	        </div>
@@ -246,10 +252,75 @@
             }
         }
     };
+    
+    var config2 = { // 국가별 표시 및 통계 그래프
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [
+                    	'${country_count["국산"]}',
+                    	'${country_count["국내산"]}',
+                    	'${country_count["호주"]}',
+                    	'${country_count["미국"]}',
+                    	'${country_count["독일"]}',
+                    	'${country_count["말레이시아"]}',
+                    	'${country_count["뉴질랜드"]}',
+                    	'${country_count["중국"]}',
+                    	'${country_count["에티오피아"]}',
+                    	'${country_count["콜롬비아"]}',
+                    	'${country_count["브라질"]}'
+                    ],
+                    backgroundColor: [
+                        '#4dc9f6',
+                        '#4dc9f6',
+                        '#E5D85C', // 노란색
+                        '#8041D9', // 보라색
+                        '#f67019',
+                        '#f53794',
+                        '#537bc4',
+                        '#acc236',
+                        '#166a8f',
+                        '#00a950',
+                        '#58595b'
+                    ],
+                    label: 'Dataset 2'
+                }],
+                labels: [
+                    '국산',
+                    '국내산',
+                    '호주',
+                    '미국',
+                    '독일',
+                    '말레이시아',
+                    '뉴질랜드',
+                    '중국',
+                    '에티오피아',
+                    '콜롬비아',
+                    '브라질'
+                ]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: '원산지 별 통계 Doughnut Chart'
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            }
+        };
 
     window.onload = function() {
         var ctx = document.getElementById('chart-area').getContext('2d');
         window.myDoughnut = new Chart(ctx, config);
+        
+        var ctx2 = document.getElementById('chart-area2').getContext('2d');
+        window.myDoughnut = new Chart(ctx2, config2);
     };
 
     var colorNames = Object.keys(window.chartColors);
