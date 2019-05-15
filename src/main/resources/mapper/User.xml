@@ -10,7 +10,7 @@
 	</select> -->
 
 	<select id="searchId" resultType="User" parameterType="String">
-		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
+		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_allergy
 		from user
 		where user_id=#{user_id}
 	</select>
@@ -30,8 +30,8 @@
 
 
 	<insert id="insert" parameterType="User">
-		insert into user( user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist ) 
-		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_eatlist}, #{user_allergy}, "/1-N/2-N/3-N/4-N/5-N/6-N/7-N/8-N/9-N/10-N/11-N/12-N/13-N/14-N/15-N/16-N/17-N/18-N/19-N/20-N/" )
+		insert into user( user_id, user_pw, user_name, user_phone, user_address, user_allergy ) 
+		values( #{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_address}, #{user_allergy} )
 	
 	</insert>
 	
@@ -55,7 +55,7 @@
 		where   user_id = #{user_id}
 	</delete>
 
-	<update id="addEatList" parameterType="User">
+	<!-- <update id="addEatList" parameterType="User">
 		update user
 		set user_eatlist = CASE
 							WHEN user_eatlist is null
@@ -63,7 +63,7 @@
 								ELSE concat(user_eatlist, concat(',', #{user_eatlist}))
 							END
 		where user_id = #{user_id}
-	</update>
+	</update> -->
 	
 	
 	
