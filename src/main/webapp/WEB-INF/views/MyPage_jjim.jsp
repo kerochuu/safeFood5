@@ -76,7 +76,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								type="hidden" name="action" value="member">
 							<div>
 								<button id="edit" type="submit"
-									class="form-control btn btn-block btn-primary">수정</button>
+									class="form-control btn btn-block btn-primary" style="width: 60%;">수정</button>
 								<button id="delete-Info" type="button" class="btn btn-danger">탈퇴</button>
 							</div>
 						</form>
@@ -138,7 +138,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">
 						<i
-							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취
+							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>찜
 						목록
 					</h2>
 					<c:choose>
@@ -147,6 +147,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								<div class="w3-container">
 									<h3 class="w3-opacity">
 										<b>${temp.jjim_food_name}</b>
+										<a href="${pageContext.request.contextPath}/jjim/deleteJjim.do?jjim_code=${temp.jjim_code}"><button type="button" class="btn btn-primary" onclick="alert('삭제되었습니다!! ${temp.jjim_code}');">삭제</button></a>
+				
 									</h3>
 									<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
 									<!--  <p>${food.material}</p>-->
@@ -229,5 +231,6 @@ $("#eat")
 		function() {
 			location.href = "${pageContext.request.contextPath}/user/userinfo.do";
 		});
+
 </script>
 </html>

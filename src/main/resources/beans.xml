@@ -40,4 +40,8 @@
 		p:session-ref="session" />
 	<bean id="eatService" class="com.ssafy.spring.service.EatServiceImpl" p:eatDao-ref="eatDao" />
 	
+	<bean id="jjimDao" class="com.ssafy.spring.dao.JjimDAOImpl"
+		p:session-ref="session" />
+	<bean id="jjimService" class="com.ssafy.spring.service.JjimServiceImpl" p:jjimDao-ref="jjimDao" />
+	
 </beans>

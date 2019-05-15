@@ -20,27 +20,15 @@ public class EatServiceImpl implements EatService {
 	
 	@Override
 	public void insertEat(Eat eat) {
+		System.out.println("insertEat service단까지 타고들어옴");
 		eatDao.insertEat(eat);
 	}
 
-	@Override
-	public void updateEat(Eat eat) {
-		eatDao.updateEat(eat);
-	}
 
 	@Override
-	public void deleteEat(Eat eat) {
-		eatDao.deleteEat(eat);
+	public void deleteEat(int eat_code) {
+		eatDao.deleteEat(eat_code);
 	}
 
-	@Override
-	public Eat selectEat(int eat_code) {
-		return eatDao.selectEat(eat_code);
-	}
-
-	@Override
-	public List<Eat> selectEatListByUser(int user_code) {
-		return eatDao.selectEatListByUser(user_code);
-	}
 
 }

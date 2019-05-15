@@ -44,16 +44,21 @@
 
 						<div id="item" class="item">
 							<input id="code" type="hidden" value="${food.food_code}">
-							<div class="product-info">
-								<div class="info-block">
+							<div class="product-info" style="width: 80%;">
+								<hr/>
+								<table>
+									<tr class="info-block">
+									<td>
 									<img
 										src="${pageContext.request.contextPath}/resources/${food.food_image}">
 									<div class="btn-set">
-										<a href="${pageContext.request.contextPath}/user/addEatList.do?user_id=${userId}&eatList=${food.food_code}"><button type="button" class="btn btn-primary" onclick="alert('섭취 목록에 추가되었습니다.');">추가</button></a>　
-										<a href="${pageContext.request.contextPath}/user/addLikeList.do?user_id=${userId}&likeNum=${food.food_code}"><button type="button" class="btn btn-primary" onclick="alert('찜!!');">찜</button></a>
+										<a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name}');">추가</button></a>　
+										<a href="${pageContext.request.contextPath}/jjim/insertJjim.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}"><button type="button" class="btn btn-primary" onclick="alert('찜!! ${userId} ${food.food_name}');">찜</button></a>
 									</div>
-								</div>
-								<div class="info-block">
+									</td>
+									<td>
+									</td>
+									<td>
 									<div class="product-title">
 										<h3 id="name"><a href = "${pageContext.request.contextPath}/food/detail.do?food_code=${food.food_code}">${food.food_name}</a></h3>
 										<p id="maker">${food.food_maker}</p>
@@ -61,7 +66,9 @@
 									<div class="product-material">
 										<p id="material">${food.food_material}</p>
 									</div>
-								</div>
+									</td>
+									</tr>
+								</table>
 							</div>
 						</div>
 

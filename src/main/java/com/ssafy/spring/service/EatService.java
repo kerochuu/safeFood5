@@ -7,12 +7,8 @@ import com.ssafy.spring.vo.Eat;
 public interface EatService {
 	void insertEat(Eat eat);
 	
-	void updateEat(Eat eat);
 	
-	void deleteEat(Eat eat);
+	void deleteEat(int eat_code);
 	
-	Eat selectEat(int eat_code);
-	
-	List<Eat> selectEatListByUser(int user_code);
 	
 }

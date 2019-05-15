@@ -76,7 +76,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								type="hidden" name="action" value="member">
 							<div>
 								<button id="edit" type="submit"
-									class="form-control btn btn-block btn-primary">수정</button>
+									class="form-control btn btn-block btn-primary" style="width: 60%;">수정</button>
 								<button id="delete-Info" type="button" class="btn btn-danger">탈퇴</button>
 							</div>
 						</form>

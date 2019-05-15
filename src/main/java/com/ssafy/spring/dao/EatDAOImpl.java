@@ -16,27 +16,15 @@ public class EatDAOImpl implements EatDAO {
 	
 	@Override
 	public void insertEat(Eat eat) {
-		session.insert("eat.insert", eat);
+		System.out.println("DAO까지 타고들어옴");
+		session.insert("eat.insertEat", eat);
 	}
 
-	@Override
-	public void updateEat(Eat eat) {
-		session.update("eat.update", eat);
-	}
 
 	@Override
-	public void deleteEat(Eat eat) {
-		session.delete("eat.delete", eat);
+	public void deleteEat(int eat_code) {
+		session.delete("eat.deleteEat", eat_code);
 	}
 
-	@Override
-	public Eat selectEat(int eat_code) {
-		return session.selectOne("eat.selectId", eat_code);
-	}
-
-	@Override
-	public List<Eat> selectEatListByUser(int user_code) {
-		return session.selectList("eat.selectList", user_code);
-	}
 
 }

@@ -15,32 +15,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.spring.service.EatService;
+import com.ssafy.spring.service.JjimService;
 import com.ssafy.spring.vo.Eat;
 import com.ssafy.spring.vo.Jjim;
 
-@RequestMapping("/eat")
-@Controller
-public class EatController {
 
-	EatService eatService;
+@RequestMapping("/jjim")
+@Controller
+public class JjimController {
+
+	JjimService jjimService;
 	@Autowired
-	public void setEatService(EatService eatService) {
-		this.eatService = eatService;
+	public void setJjimService(JjimService jjimService) {
+		this.jjimService = jjimService;
 	}
 	
-	@GetMapping("/insertEat.do")
-	public String insertEat(String user_id, int food_code, String food_name) {
-		System.out.print("섭취목록추가 컨트롤러");
-		Eat temp = new Eat(user_id, food_code, food_name);
-		System.out.println(user_id + "," + food_code + "," + food_name);
-		eatService.insertEat(temp);
+	@GetMapping("/insertJjim.do")
+	public String insertJjim(String user_id, int food_code, String food_name) {
+		Jjim temp = new Jjim (user_id, food_code, food_name);
+		jjimService.insertJjim(temp);
+		return "redirect:/SearchPage.jsp"; // 이부분이 문제
+	}
+	
+	@GetMapping("/deleteJjim.do")
+	public String deleteJjim(int jjim_code) {
+		System.out.println("찜코드!!!! -> " + jjim_code);
+		jjimService.deleteJjim(jjim_code);
 		return "redirect:/SearchPage.jsp";
 	}
 	
-	@GetMapping("/deleteEat.do")
-	public String deleteEat(int eat_code) {
-		eatService.deleteEat(eat_code);
-		return "redirect:/SearchPage.jsp";
-	}
+
+	
+
+
 
 }

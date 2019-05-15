@@ -8,14 +8,8 @@ import com.ssafy.spring.vo.Eat;
 public interface EatDAO {
 	void insertEat(Eat eat);
 	
-	void updateEat(Eat eat);
+	void deleteEat(int eat_code);
 	
-	void deleteEat(Eat eat);
-	
-	Eat selectEat(int eat_code);
-	
-	List<Eat> selectEatListByUser(int user_code);
-	
-	
+
 	
 }

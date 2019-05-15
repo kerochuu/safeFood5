@@ -22,11 +22,6 @@
 	</select>
 
 
-	<select id="findUserWithFoodList" resultType="User" parameterType = "int">
-		select user_id, user_name, user_eatlist
-		from user
-		where user_code = #{user_code}
-	</select>
 
 
 	<insert id="insert" parameterType="User">
@@ -85,7 +80,7 @@
 	
 	<resultMap type="Eat" id="EatResultMap">
 		<id column="eat_code" property="eat_code"/>
-		<result column="eat_user_code" property="eat_user_code"/>
+		<result column="eat_user_id" property="eat_user_id"/>
 		<result column="eat_food_code" property="eat_food_code"/>		
 		<result column="eat_food_name" property="eat_food_name"/>		
 	</resultMap>
@@ -99,16 +94,16 @@
 	
 	<select id="getUserWithEats" parameterType="String" resultMap="UserJoinResultMap">
 		select user_id, user_pw, user_name, user_phone, user_address, user_allergy,
-	 		  eat_code, eat_user_code, eat_food_code, eat_food_name
+	 		  eat_code, eat_user_id, eat_food_code, eat_food_name
 		from  `user`
-		left outer join eat on (user_code = eat_user_code)
+		left outer join eat on (user_id = eat_user_id)
 		where user_id = #{user_id}
 	</select>
 	
 	
 	
 	<select id="getUser_jjim" resultMap="UserResultMap" parameterType="String">
-		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_eatlist, user_allergy, user_likelist
+		select user_code, user_id, user_pw, user_name, user_phone, user_address, user_allergy
 		from user
 		where user_id = #{user_id}
 	</select>
@@ -116,7 +111,7 @@
 
 	<resultMap type="Jjim" id="JjimResultMap">
 		<id column="jjim_code" property="jjim_code"/>
-		<result column="jjim_user_code" property="jjim_user_code"/>
+		<result column="jjim_user_id" property="jjim_user_id"/>
 		<result column="jjim_food_code" property="jjim_food_code"/>		
 		<result column="jjim_food_name" property="jjim_food_name"/>		
 	</resultMap>
@@ -130,9 +125,9 @@
 	
 	<select id="getUserWithJjims" parameterType="String" resultMap="UserJoinResultMap_Jjim">
 		select user_id, user_pw, user_name, user_phone, user_address, user_allergy,
-	 		  jjim_code, jjim_user_code, jjim_food_code, jjim_food_name
+	 		  jjim_code, jjim_user_id, jjim_food_code, jjim_food_name
 		from  `user`
-		left outer join jjim on (user_code = jjim_user_code)
+		left outer join jjim on (user_id = jjim_user_id)
 		where user_id = #{user_id}
 	</select>
 </mapper>
