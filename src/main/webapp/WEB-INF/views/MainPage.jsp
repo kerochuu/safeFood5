@@ -44,9 +44,9 @@
 	        		</tr>
 	        		<c:forEach items="${bestfood}" var="food">
 		            	<tr>
-		            		<th>${food.food_name}</th>
-		            		<td align="right">${food.food_maker}</td>
-		            		<td align="right">${food.food_count}</td>
+		            		<td width="150">${food.food_name}</th>
+		            		<td width="100">${food.food_maker}</td>
+		            		<td>${food.food_count}</td>
 		            	</tr>
 		            </c:forEach>
 	        	</table>
