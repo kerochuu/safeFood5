@@ -58,6 +58,20 @@
 		where	food.food_allergy LIKE concat('%', #{key}, '%')
 	</select>
 	
+	<update id="plusSearchCount" parameterType="int">
+		update 	food
+		set 	food_count = if(food_count is null, 1, food_count+1)
+		where 	food_code = #{food_code}
+	</update>
+	
+	<select id="selectBestSearch">
+		select		food_name, food_maker, food_count
+		from		food
+		where		food_count>0
+		order by	food_count desc
+		limit		0,5;
+	</select>
+	
 	
 </mapper>
 

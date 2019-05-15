@@ -120,7 +120,7 @@
 						if(count > 0)
 							country_count.put(country, count);
 					}
-					System.out.println(country_count.toString());
+					//System.out.println(country_count.toString());
 					pageContext.setAttribute("country_count", country_count);
 				%>
 	        

@@ -56,4 +56,9 @@ public class FoodDAOImpl implements FoodDAO {
 //		return session.selectList("food.selectFoodByIds", idList);
 //	}
 
+	@Override
+	public void plusSearchCount(int food_code) {
+		session.update("food.plusSearchCount", food_code);
+	}
+	
 }

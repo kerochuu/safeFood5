@@ -77,6 +77,7 @@ public class FoodController {
 	
 	@GetMapping("/detail.do")
 	public String getDetail(int food_code, Model model) {
+		foodService.plusSearchCount(food_code);
 		model.addAttribute("food", foodService.selectFood(food_code));
 		return "DetailPage";
 	}

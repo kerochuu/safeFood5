@@ -23,4 +23,6 @@ public interface FoodDAO {
 
 //	List<Food> selectFoodByCodes(int[] codes);
 	
+	void plusSearchCount(int food_code);
+	
 }

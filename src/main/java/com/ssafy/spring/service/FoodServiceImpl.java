@@ -57,5 +57,10 @@ public class FoodServiceImpl implements FoodService{
 //		return foodDao.selectFoodByCodes(codes);
 //	}
 	
+	@Override
+	public void plusSearchCount(int food_code) {
+		foodDao.plusSearchCount(food_code);
+	}
+	
 	
 }
