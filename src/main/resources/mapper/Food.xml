@@ -34,22 +34,28 @@
 		from	food
 	</select>
 
-	<select id="selectFoodListByName" resultMap="FoodResultMap">
+	<select id="selectFoodListByName" resultMap="FoodResultMap" parameterType="String">
 		select	food_code, food_name, nutr_cont1, nutr_cont2, nutr_cont3, nutr_cont4, nutr_cont5, nutr_cont6, nutr_cont7, nutr_cont8, nutr_cont9, food_maker, food_material, food_image 
 		from	food
-		where	food.food_name LIKE '%#{key}%'
+		where	food.food_name LIKE concat('%', #{key}, '%')
 	</select>
 	
-	<select id="selectFoodListByMaker" resultMap="FoodResultMap">
+	<select id="selectFoodListByMaker" resultMap="FoodResultMap" parameterType="String">
 		select	food_code, food_name, nutr_cont1, nutr_cont2, nutr_cont3, nutr_cont4, nutr_cont5, nutr_cont6, nutr_cont7, nutr_cont8, nutr_cont9, food_maker, food_material, food_image 
 		from	food
-		where	food.food_maker LIKE '%#{key}%'
+		where	food.food_maker LIKE concat('%', #{key}, '%')
 	</select>
 	
-	<select id="selectFoodListByMaterial" resultMap="FoodResultMap">
+	<select id="selectFoodListByMaterial" resultMap="FoodResultMap" parameterType="String">
 		select	food_code, food_name, nutr_cont1, nutr_cont2, nutr_cont3, nutr_cont4, nutr_cont5, nutr_cont6, nutr_cont7, nutr_cont8, nutr_cont9, food_maker, food_material, food_image 
 		from	food
-		where	food.food_material LIKE '%#{key}%'
+		where	food.food_material LIKE concat('%', #{key}, '%')
+	</select>
+	
+	<select id="selectFoodListByAllergy" resultMap="FoodResultMap" parameterType="String">
+		select	food_code, food_name, nutr_cont1, nutr_cont2, nutr_cont3, nutr_cont4, nutr_cont5, nutr_cont6, nutr_cont7, nutr_cont8, nutr_cont9, food_maker, food_material, food_image 
+		from	food
+		where	food.food_allergy LIKE concat('%', #{key}, '%')
 	</select>
 	
 	

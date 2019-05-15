@@ -28,22 +28,22 @@ public class FoodDAOImpl implements FoodDAO {
 	
 	@Override
 	public List<Food> selectFoodByName(String key) {
-		return session.selectList("food.selectFoodListByName");
+		return session.selectList("food.selectFoodListByName", key);
 	}
 
 	@Override
 	public List<Food> selectFoodByMaker(String key) {
-		return session.selectList("food.selectFoodListByMaker");
+		return session.selectList("food.selectFoodListByMaker", key);
 	}
 
 	@Override
 	public List<Food> selectFoodByMaterial(String key) {
-		return session.selectList("food.selectFoodListByMaterial");
+		return session.selectList("food.selectFoodListByMaterial", key);
 	}
 
 	@Override
 	public List<Food> selectFoodByAllergy(String key) {
-		return session.selectList("food.selectFoodListByAllergy");
+		return session.selectList("food.selectFoodListByAllergy", key);
 	}
 
 //	@Override

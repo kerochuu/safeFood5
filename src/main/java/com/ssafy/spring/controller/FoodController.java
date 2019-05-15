@@ -26,35 +26,54 @@ public class FoodController {
 	}
 	
 	
+//	@PostMapping("/list.do")
+//	public String getFoodList(Model model) {
+//		model.addAttribute("foodList", foodService.selectFoodList());
+//		return "SearchPage";
+//	}
+	
 	@PostMapping("/list.do")
-	public String getFoodList(Model model) {
-		model.addAttribute("foodList", foodService.selectFoodList());
+	public String getFoodList(String category, String keyword, Model model) {
+		if(keyword.equals(""))
+			model.addAttribute("foodList", foodService.selectFoodList());
+		else {
+			if(category.equals("searchByName"))
+				model.addAttribute("foodList", foodService.selectFoodByName(keyword));
+			else if(category.equals("searchByMaker"))
+				model.addAttribute("foodList", foodService.selectFoodByMaker(keyword));
+			else if(category.equals("searchByMaterial"))
+				model.addAttribute("foodList", foodService.selectFoodByMaterial(keyword));
+			else if(category.equals("searchByAllergy"))
+				model.addAttribute("foodList", foodService.selectFoodByAllergy(keyword));
+			else
+				System.out.println("엘렐렐레ㅔ레레ㅔㄹ레렐레ㅔ");
+		}
 		return "SearchPage";
 	}
 	
-	@PostMapping("/searchByName.do")
-	public String searchByName(String key, Model model) {
-		model.addAttribute("foodList", foodService.selectFoodByName(key));
-		return "SearchPage";
-	}
-	
-	@PostMapping("/searchByMaker.do")
-	public String searchByMaker(String key, Model model) {
-		model.addAttribute("foodList", foodService.selectFoodByMaker(key));
-		return "SearchPage";
-	}
-	
-	@PostMapping("/searchByMaterial.do")
-	public String searchByMaterial(String key, Model model) {
-		model.addAttribute("foodList", foodService.selectFoodByMaterial(key));
-		return "SearchPage";
-	}
-	
-	@PostMapping("/searchByAllergy.do")
-	public String searchByAllergy(String key, Model model) {
-		model.addAttribute("foodList", foodService.selectFoodByAllergy(key));
-		return "SearchPage";
-	}
+//	@PostMapping("/searchByName.do")
+//	public String searchByName(String key, Model model) {
+//		model.addAttribute("foodList", foodService.selectFoodByName(key));
+//		return "SearchPage";
+//	}
+//	
+//	@PostMapping("/searchByMaker.do")
+//	public String searchByMaker(String key, Model model) {
+//		model.addAttribute("foodList", foodService.selectFoodByMaker(key));
+//		return "SearchPage";
+//	}
+//	
+//	@PostMapping("/searchByMaterial.do")
+//	public String searchByMaterial(String key, Model model) {
+//		model.addAttribute("foodList", foodService.selectFoodByMaterial(key));
+//		return "SearchPage";
+//	}
+//	
+//	@PostMapping("/searchByAllergy.do")
+//	public String searchByAllergy(String key, Model model) {
+//		model.addAttribute("foodList", foodService.selectFoodByAllergy(key));
+//		return "SearchPage";
+//	}
 	
 	@GetMapping("/detail.do")
 	public String getDetail(int food_code, Model model) {
@@ -67,10 +86,10 @@ public class FoodController {
 		return "MainPage";
 	}
 	
-//	@GetMapping("/SearchPage.do")
-//	public String getSearchPage(Model model) {
-//		model.addAttribute("foodList", foodService.selectFoodList());
-//		return "SearchPage";
-//	}
+	@GetMapping("/SearchPage.do")
+	public String getSearchPage(Model model) {
+		model.addAttribute("foodList", foodService.selectFoodList());
+		return "SearchPage";
+	}
 
 }
