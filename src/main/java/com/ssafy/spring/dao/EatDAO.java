@@ -10,6 +10,6 @@ public interface EatDAO {
 	
 	void deleteEat(int eat_code);
 	
-
+	List<Eat> selectSeqFood(String eat_user_id);
 	
 }

@@ -31,4 +31,11 @@ public class EatServiceImpl implements EatService {
 	}
 
 
+	@Override
+	public List<Eat> selectSeqFood(String eat_user_id) {
+		System.out.println("셀렉트시퀸스푸드 써비쓰");
+		return eatDao.selectSeqFood(eat_user_id);
+	}
+
+
 }

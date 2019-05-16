@@ -24,7 +24,8 @@
 	<main>
 		<form action="${pageContext.request.contextPath}/food/list.do" method="post">
 	    	<h2 class="title-sub">제품정보</h2>
-	    	<button id="add" type="submit" class="btn btn-primary">추가</button>
+	    <a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}&food_material=${food.food_material}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');">추가</button></a>　
+										
 		</form>
 		<hr>
 		<div id="productInfo" class="contents">

@@ -38,6 +38,11 @@ public class Food {
 	protected int food_count;
 	
 	
+	public Food(String food_name) {
+		super();
+		this.food_name = food_name;
+	}
+
 	public Food() {	}
 
 	public Food(int food_code, String food_name, double serving_wt, double nutr_cont1, double nutr_cont2,

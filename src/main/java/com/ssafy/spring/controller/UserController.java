@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ssafy.spring.service.EatService;
 import com.ssafy.spring.service.FoodService;
 import com.ssafy.spring.service.UserService;
 import com.ssafy.spring.vo.User;
@@ -26,6 +27,7 @@ public class UserController {
 
 	UserService userService;
 	FoodService foodService;
+	EatService eatService;
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
@@ -33,6 +35,10 @@ public class UserController {
 	@Autowired
 	public void setFoodService(FoodService foodService) {
 		this.foodService = foodService;
+	}
+	@Autowired
+	public void setEatService(EatService eatService) {
+		this.eatService = eatService;
 	}
 	
 	@PostMapping("/login.do")
@@ -112,6 +118,8 @@ public class UserController {
 	@GetMapping("/userinfo.do")
 	public String serchById(HttpSession session, Model model) {
 		model.addAttribute("user", userService.getUser((String) session.getAttribute("userId")));
+		System.out.println("유저인포 잇리스트....");
+		model.addAttribute("eatList", eatService.selectSeqFood((String) session.getAttribute("userId")));	
 		return "MyPage";
 	}
 	

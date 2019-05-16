@@ -9,22 +9,30 @@
 <head>
 <title>SafeFoodForYou</title>
 <meta charset="utf-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet'
+	href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif
@@ -71,7 +79,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 							<input type="hidden" name="action" value="member">
 							<div>
 								<button id="edit" type="submit"
-									class="form-control btn btn-block btn-primary" style="width: 60%;">수정</button>
+									class="form-control btn btn-block btn-primary"
+									style="width: 60%;">수정</button>
 								<button id="delete-Info" type="button" class="btn btn-danger">탈퇴</button>
 							</div>
 						</form>
@@ -125,43 +134,70 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			</div>
 
 			<!-- Right Column -->
-			<div class="w3-twothird">
+			<div class="w3-twothird" style="width: 45%;">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">
-						<i class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취 목록
+						<i
+							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취
+						목록
 					</h2>
-					<c:choose>
-						<c:when test="${not empty user.list}">
-							<c:forEach items="${user.list}" var="temp">
-								<div class="w3-container">
-									<h3 class="w3-opacity">
-										<b>${temp.eat_food_name}</b>
-										<a href="${pageContext.request.contextPath}/eat/deleteEat.do?eat_code=${temp.eat_code}"><button type="button" class="btn btn-primary" onclick="alert('삭제되었습니다!! ${temp.eat_code}');">삭제</button></a>
-				
-									</h3>
-									<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
-									<!--  <p>${food.material}</p>-->
-									<hr>
-								</div>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							해당 내용이 존재하지 않습니다.
-						</c:otherwise>
-					</c:choose>
+
+					<c:forEach items="${user.list}" var="temp">
+						<div class="w3-container">
+							<h3 class="w3-opacity">
+								<b>${temp.eat_food_name}</b> <a
+									href="${pageContext.request.contextPath}/eat/deleteEat.do?eat_code=${temp.eat_code}"><button
+										type="button" class="btn btn-primary"
+										onclick="alert('삭제되었습니다!! ${temp.eat_code}');">삭제</button></a>
+
+							</h3>
+							<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
+							<!--  <p>${food.material}</p>-->
+							<hr />
+						</div>
+
+					</c:forEach>
 				</div>
+
 				<!-- End Right Column -->
 				<div>
 					<button id="jjim" type="submit"
 						class="form-control btn btn-block btn-primary">찜목록</button>
 					<button id="allergyInfo" type="submit"
 						class="form-control btn btn-block btn-primary">알레르기정보</button>
-					
+
 				</div>
 			</div>
 
-			
+			<div class="w3-twothird" style="width: 20%;">
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">
+						<i
+							class="fa fa-arrow-circle-o-down fa-fw w3-margin-right w3-xxlarge w3-text-teal"
+							aria-hidden="true"></i>순위
+
+
+					</h2>
+					<c:forEach items="${eatList}" var="el">
+						<div class="w3-container">
+							<h6 class="w3-opacity">
+								<a href = "${pageContext.request.contextPath}/food/detail.do?food_code=${el.eat_food_code}">
+								<b>${el.eat_food_name}</b></a>
+												
+
+							</h6>
+							<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
+							<!--  <p>${food.material}</p>-->
+							<hr />
+						</div>
+					</c:forEach>
+
+				</div>
+
+			</div>
+
+
 
 			<!-- End Grid -->
 		</div>
@@ -170,8 +206,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	</div>
 	</main>
 	<jsp:include page="Footer.jsp" />
-	
-	
+
+
 	<script type="text/javascript">
       let eat = new Vue({
          el : "#app",
@@ -316,6 +352,7 @@ p {
 	margin: 3% 0 0 9.5%;
 }
 </style>
+
 <script>
 $("#exit").click(function(){
 	 location.href = "main.do?action=member&method=deleteMember";
