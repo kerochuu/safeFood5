@@ -52,9 +52,18 @@
 									<img
 										src="${pageContext.request.contextPath}/resources/${food.food_image}">
 									<div class="btn-set">
-										<a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}&food_material=${food.food_material}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');">추가</button></a>　
+										<form method="post"  action="${pageContext.request.contextPath}/eat/insertEat.do">
+											<input type="hidden" name="user_id" value="${userId}"/>
+											<input type="hidden" name="food_code" value="${food.food_code}"/>
+											<input type="hidden" name="food_name" value="${food.food_name}"/>
+											<input type="hidden" name="food_material" value="${food.food_material}"/>
+											<input type="submit" class="btn btn-primary" 
+												onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');" value="추가"/>
+											<input type="submit" class="btn btn-info" onclick="alert('찜!! ${userId} ${food.food_name}');" formaction="${pageContext.request.contextPath}/jjim/insertJjim.do" value="찜"/>
+										</form>
+<%-- 										<a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}&food_material=${food.food_material}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');">추가</button></a>　
 										<a href="${pageContext.request.contextPath}/jjim/insertJjim.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}"><button type="button" class="btn btn-primary" onclick="alert('찜!! ${userId} ${food.food_name}');">찜</button></a>
-									</div>
+ --%>									</div>
 									</td>
 									<td>
 									</td>

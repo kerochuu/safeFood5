@@ -30,7 +30,7 @@ public class JjimController {
 		this.jjimService = jjimService;
 	}
 	
-	@GetMapping("/insertJjim.do")
+	@PostMapping("/insertJjim.do")
 	public String insertJjim(String user_id, int food_code, String food_name) {
 		System.out.println("insertJJIm...");
 		Jjim temp = new Jjim (user_id, food_code, food_name);

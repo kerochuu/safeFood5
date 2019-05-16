@@ -155,7 +155,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				<div>
 					<button id="jjim" type="submit"
 						class="form-control btn btn-block btn-primary">찜목록</button>
-					<button id="jjim" type="submit"
+					<button id="allergyInfo" type="submit"
 						class="form-control btn btn-block btn-primary">알레르기정보</button>
 					
 				</div>
@@ -331,5 +331,11 @@ $("#jjim")
 		function() {
 			location.href = "${pageContext.request.contextPath}/user/userinfo_jjim.do";
 		});
+$("#allergyInfo")
+.click(
+		function() {
+			location.href = "${pageContext.request.contextPath}/user/userinfo_allergyInfo.do";
+		});
+
 </script>
 </html>

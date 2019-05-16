@@ -146,7 +146,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					<c:choose>
 						<c:when test="${not empty user.list}">
 							<%
-								String[] allergys = {"새우", "대두", "우유", "땅콩", "돼지고기", "계란", "소고기", "팜유"};
+								String[] allergys = {"새우", "대두", "우유", "땅콩", "돼지고기", "계란", "소고기"};
 								HashMap<String, Integer> allergy_count = new HashMap<String, Integer>();
 								//System.out.println(country_count.toString());
 								
@@ -270,8 +270,7 @@ p {
                 	'${allergy_count["땅콩"]}',
                 	'${allergy_count["돼지고기"]}',
                 	'${allergy_count["계란"]}',
-                	'${allergy_count["소고기"]}',
-                	'${allergy_count["팜유"]}'
+                	'${allergy_count["소고기"]}'
                 ],
                 backgroundColor: [
                     '#4dc9f6',
@@ -292,8 +291,7 @@ p {
                 '땅콩',
                 '돼지고기',
                 '계란',
-                '소고기',
-                '팜유'
+                '소고기'
             ]
         },
         options: {

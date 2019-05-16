@@ -28,7 +28,7 @@ public class EatController {
 		this.eatService = eatService;
 	}
 	
-	@GetMapping("/insertEat.do")
+	@PostMapping("/insertEat.do")
 	public String insertEat(String user_id, int food_code, String food_name, String food_material) {
 		System.out.println("섭취목록추가 컨트롤러");
 		Eat temp = new Eat(user_id, food_code, food_name, food_material);
