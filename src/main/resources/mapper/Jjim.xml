@@ -11,8 +11,8 @@
 
 
 	<insert id="insertJjim" parameterType="Jjim">
-		insert into jjim( jjim_user_id, jjim_food_code, jjim_food_name)
-		values( #{jjim_user_id}, #{jjim_food_code}, #{jjim_food_name})
+		insert into jjim(jjim_user_id, jjim_food_code, jjim_food_name)
+		values(#{jjim_user_id}, #{jjim_food_code}, #{jjim_food_name})
 	</insert>
 	
 <!-- 	
@@ -29,6 +29,12 @@
 		delete  from jjim
 		where   jjim_code = #{jjim_code}
 	</delete>
+	
+	<select id="selectJjim" parameterType="int" resultType="Jjim">
+		select jjim_user_id, jjim_food_code, jjim_food_name
+		from jjim
+		where jjim_code = #{jjim_code}
+	</select>
 
 	
 	

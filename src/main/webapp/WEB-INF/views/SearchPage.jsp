@@ -56,7 +56,13 @@
 											<input type="hidden" name="user_id" value="${userId}"/>
 											<input type="hidden" name="food_code" value="${food.food_code}"/>
 											<input type="hidden" name="food_name" value="${food.food_name}"/>
+											<input type="hidden" name="nutr_cont1" value="${food.nutr_cont1}"/>
+											<input type="hidden" name="nutr_cont2" value="${food.nutr_cont2}"/>
+											<input type="hidden" name="nutr_cont3" value="${food.nutr_cont3}"/>
+											<input type="hidden" name="nutr_cont4" value="${food.nutr_cont4}"/>
+											<input type="hidden" name="nutr_cont5" value="${food.nutr_cont5}"/>
 											<input type="hidden" name="food_material" value="${food.food_material}"/>
+											
 											<input type="submit" class="btn btn-primary" 
 												onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');" value="추가"/>
 											<input type="submit" class="btn btn-info" onclick="alert('찜!! ${userId} ${food.food_name}');" formaction="${pageContext.request.contextPath}/jjim/insertJjim.do" value="찜"/>

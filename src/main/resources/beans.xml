@@ -44,4 +44,11 @@
 		p:session-ref="session" />
 	<bean id="jjimService" class="com.ssafy.spring.service.JjimServiceImpl" p:jjimDao-ref="jjimDao" />
 	
+	
+	<bean id="valueDao" class="com.ssafy.spring.dao.ValueDAOImpl"
+		p:session-ref="session" />
+	<bean id="valueService" class="com.ssafy.spring.service.ValueServiceImpl" p:valueDao-ref="valueDao" />
+	
+	
+	
 </beans>

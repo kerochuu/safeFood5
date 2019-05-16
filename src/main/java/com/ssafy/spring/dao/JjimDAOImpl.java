@@ -22,4 +22,9 @@ public class JjimDAOImpl implements JjimDAO {
 		session.delete("jjim.deleteJjim", jjim_code);
 	}
 
+	@Override
+	public Jjim selectJjim(int jjim_code) {
+		return session.selectOne("jjim.selectJjim", jjim_code);
+	}
+
 }

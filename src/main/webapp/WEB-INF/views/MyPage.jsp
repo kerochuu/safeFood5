@@ -92,24 +92,24 @@ html, body, h1, h2, h3, h4, h5, h6 {
 						<p>탄수화물</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 90%">90%</div>
+								style="width: (${value.value_carbo})%">${value.value_carbo}</div>
 						</div>
 						<p>단백질</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 80%">
-								<div class="w3-center w3-text-white">80%</div>
+								style="width: ${value.value_protein}%">
+								<div class="w3-center w3-text-white">${value.value_protein}</div>
 							</div>
 						</div>
 						<p>지방</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 75%">75%</div>
+								style="width: ${value.value_fat}%">${value.value_fat}</div>
 						</div>
 						<p>나트륨</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 50%">50%</div>
+								style="width: ${value.value_natrium}%">${value.value_natrium}</div>
 						</div>
 						<br>
 
@@ -133,7 +133,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				<!-- End Left Column -->
 			</div>
 
-			<!-- Right Column -->
+			<!-- Right qweqweqweqwe Column -->
 			<div class="w3-twothird" style="width: 45%;">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
@@ -199,7 +199,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 
 
 
-			<!-- End Grid -->
+			<!-- End qweqweqweqwe Grid -->
 		</div>
 
 		<!-- End Page Container -->
