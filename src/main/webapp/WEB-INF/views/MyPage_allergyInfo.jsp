@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="org.springframework.util.StringUtils"%>
+<%@ page import="java.util.List" %>
 <%@ page import="com.ssafy.spring.vo.User"%>
 <%@ page import="com.ssafy.spring.vo.Eat"%>
 
@@ -148,9 +149,25 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								String[] allergys = {"새우", "대두", "우유"};
 								HashMap<String, Integer> allergy_count = new HashMap<String, Integer>();
 								//System.out.println(country_count.toString());
+								
+								List<Eat> user_eatlist = ((User) request.getAttribute("user")).getList();
+								System.out.println(user_eatlist.toString());
+								
+								for(Eat user_eat: user_eatlist) { // 먹은 음식 하나
+									String material = user_eat.getEat_food_material();
+									for(String allergy: allergys) {
+										int count = StringUtils.countOccurrencesOf(material, allergy); // material에 allergy가 몇 번 나오는지
+										
+										if(allergy_count.containsKey(allergy))
+											allergy_count.put(allergy, allergy_count.get(allergy)+count);
+										else
+											allergy_count.put(allergy, count);
+									}
+								}
+								System.out.println(allergy_count.toString());
 								pageContext.setAttribute("allergy_count", allergy_count);
 							%>
-							<c:forEach items="${user.list}" var="temp">
+							<%-- <c:forEach items="${user.list}" var="temp">
 								<div class="w3-container">
 									<%
 										String material = ((Eat) request.getAttribute("temp")).getEat_food_material();
@@ -162,7 +179,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 									%>
 									<hr>
 								</div>
-							</c:forEach>
+							</c:forEach> --%>
 							
 							<div class="nutrition-info">
 	            				<div class="info-block">

@@ -8,9 +8,8 @@ public class Eat {
 	String eat_food_material;
 	
 	
-	public Eat(int eat_code, String eat_user_id, int eat_food_code, String eat_food_name, String eat_food_material) {
+	public Eat(String eat_user_id, int eat_food_code, String eat_food_name, String eat_food_material) {
 		super();
-		this.eat_code = eat_code;
 		this.eat_user_id = eat_user_id;
 		this.eat_food_code = eat_food_code;
 		this.eat_food_name = eat_food_name;

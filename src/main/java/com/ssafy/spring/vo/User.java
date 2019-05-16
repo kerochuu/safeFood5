@@ -14,13 +14,6 @@ public class User {
 	
 	List<Eat> list;
 
-	public List<Eat> getList() {
-		return list;
-	}
-
-	public void setList(List<Eat> list) {
-		this.list = list;
-	}
 
 	public User(int user_Code, String user_id, String user_pw, String user_name, String user_phone, String user_address,
 			String user_eatlist, String user_allergy, String allergy, String user_likelist, List<Eat> list) {
@@ -133,9 +126,15 @@ public class User {
 	public String getUser_likelist() {
 		return user_likelist;
 	}
-
 	public void setUser_likelist(String user_likelist) {
 		this.user_likelist = user_likelist;
+	}
+	
+	public List<Eat> getList() {
+		return list;
+	}
+	public void setList(List<Eat> list) {
+		this.list = list;
 	}
 
 	

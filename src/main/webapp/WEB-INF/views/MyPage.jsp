@@ -9,19 +9,22 @@
 <head>
 <title>SafeFoodForYou</title>
 <meta charset="utf-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel='stylesheet'
-	href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-4.1.0.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif
@@ -48,32 +51,24 @@ html, body, h1, h2, h3, h4, h5, h6 {
 						<form method=post action="changeInfo.do">
 
 							<p>
-								<i
-									class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									id="id" class="form-control" name="user_id" type=text
-									value="${user.user_id}">
+								<i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>
+								<input id="id" class="form-control" name="user_id" type=text value="${user.user_id}">
 							</p>
 
 							<p>
-								<i
-									class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									class="form-control" name="user_address" type=text
-									value="${user.user_address}">
+								<i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>
+								<input class="form-control" name="user_address" type=text value="${user.user_address}">
 							</p>
 							<p>
-								<i
-									class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									class="form-control" name="user_phone" type=text
-									value="${user.user_phone}">
+								<i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>
+								<input class="form-control" name="user_phone" type=text value="${user.user_phone}">
 							</p>
 							<p>
-								<i
-									class="fa fa-lock fa-fw w3-margin-right w3-large w3-text-teal"></i><input
-									class="form-control" name="user_pw" type=password
-									value="${user.user_pw}">
+								<i class="fa fa-lock fa-fw w3-margin-right w3-large w3-text-teal"></i>
+								<input class="form-control" name="user_pw" type=password value="${user.user_pw}">
 							</p>
-							<input type="hidden" name="method" value="editMember"> <input
-								type="hidden" name="action" value="member">
+							<input type="hidden" name="method" value="editMember">
+							<input type="hidden" name="action" value="member">
 							<div>
 								<button id="edit" type="submit"
 									class="form-control btn btn-block btn-primary" style="width: 60%;">수정</button>
@@ -83,9 +78,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 						<hr>
 
 						<p class="w3-large">
-							<b><i
-								class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>일일
-								섭취량</b>
+							<b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>일일 섭취량</b>
 						</p>
 						<p>탄수화물</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
@@ -112,8 +105,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 						<br>
 
 						<p class="w3-large w3-text-theme">
-							<b><i
-								class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>알러지</b>
+							<b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>알러지</b>
 						</p>
 						<div id="allergy">
 							<c:choose>
@@ -137,12 +129,10 @@ html, body, h1, h2, h3, h4, h5, h6 {
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">
-						<i
-							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취
-						목록
+						<i class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취 목록
 					</h2>
 					<c:choose>
-						<c:when test="${not empty user.user_allergy}">
+						<c:when test="${not empty user.list}">
 							<c:forEach items="${user.list}" var="temp">
 								<div class="w3-container">
 									<h3 class="w3-opacity">
@@ -180,6 +170,116 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	</div>
 	</main>
 	<jsp:include page="Footer.jsp" />
+	
+	
+	<script type="text/javascript">
+      let eat = new Vue({
+         el : "#app",
+         data: {
+            eatList : [],
+            foodList : [],
+            date : '',
+            calData : [],
+            isGet : false,
+            
+            supportpereat : 0,
+            calory : 0,
+            carbo : 0,
+            protein : 0,
+            fat : 0,
+            sugar : 0,
+            natrium : 0,
+            chole : 0,
+            fattycid : 0,
+            transfat : 0,
+            userInfo : '',
+         },
+         methods: {
+            getUser() {
+                 axios.get("http://localhost:9080/basic/user/getuser")
+                  .then(response => {
+                     this.userInfo = response.data;
+                  })
+                  .catch()
+                  .finally();
+             },
+            getFoodList() { // 내가 섭취한 음식만 가져오기
+               axios.get("http://70.12.247.55:9080/basic/food/selectEatList.do?id=" + this.userInfo)
+                   .then(response => {
+                      this.foodList = response.data;
+                   })
+                   .catch()
+                   .finally();
+            },
+            getEatCal() { // 먹은 음식 성분 계산
+               console.log('getEatcal');
+               this.supportpereat = 0;
+                this.calory = 0;
+                this.carbo = 0;
+                this.protein = 0;
+                this.fat = 0;
+                this.sugar = 0;
+                this.natrium = 0;
+                this.chole = 0;
+                this.fattycid = 0;
+                this.transfat = 0;
+                
+               for(let i = 0; i < this.foodList.length; i++) {
+                  if(this.foodList[i].personeat.date === this.date) {
+                     this.supportpereat += this.foodList[i].supportpereat;
+                        this.calory += this.foodList[i].calory;
+                        this.carbo += this.foodList[i].carbo;
+                        this.protein += this.foodList[i].protein;
+                        this.fat += this.foodList[i].fat;
+                        this.sugar += this.foodList[i].sugar;
+                        this.natrium += this.foodList[i].natrium;
+                        this.chole += this.foodList[i].chole;
+                        this.fattycid += this.foodList[i].fattycid;
+                        this.transfat += this.foodList[i].transfat;
+                  };
+               };
+               this.isGet = true;
+               this.getGraph();
+            },
+            getGraph() {
+               google.charts.load('current', {'packages' : ['corechart']});
+             google.charts.setOnLoadCallback(drawChart);
+             
+             // Draw the chart and set the chart values
+             function drawChart() {
+                
+               let data = google.visualization.arrayToDataTable([
+               /* ['일일 제공량', ${food.supportpereat}], */
+               ['성분', '제공량'],
+               ['칼로리', eat.$data.supportpereat],
+               ['탄수화물', eat.$data.carbo],
+               ['단백질', eat.$data.protein],
+               ['지방', eat.$data.fat],
+               ['당류', eat.$data.sugar],
+               ['나트륨', eat.$data.natrium],
+               ['콜레스테롤', eat.$data.chole],
+               ['포화지방산', eat.$data.fattyacid],
+               ['트랜스지방', eat.$data.transfat],
+             ]); 
+               
+              let options = {
+                'title' : eat.$data.date +'일 섭취량',
+                /* 'width' : 100%,
+                'height' : 100%, */
+              };
+              let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+              chart.draw(data, options);
+             }
+            },
+         },
+         created() {
+            window.onload = () => {
+               this.getUser();
+             };
+         },
+      });
+
+   </script>
 </body>
 <style>
 body {

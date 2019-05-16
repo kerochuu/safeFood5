@@ -52,7 +52,7 @@
 									<img
 										src="${pageContext.request.contextPath}/resources/${food.food_image}">
 									<div class="btn-set">
-										<a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name}');">추가</button></a>　
+										<a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}&food_material=${food.food_material}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');">추가</button></a>　
 										<a href="${pageContext.request.contextPath}/jjim/insertJjim.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}"><button type="button" class="btn btn-primary" onclick="alert('찜!! ${userId} ${food.food_name}');">찜</button></a>
 									</div>
 									</td>
