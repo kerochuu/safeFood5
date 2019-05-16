@@ -32,16 +32,17 @@ public class JjimController {
 	
 	@GetMapping("/insertJjim.do")
 	public String insertJjim(String user_id, int food_code, String food_name) {
+		System.out.println("insertJJIm...");
 		Jjim temp = new Jjim (user_id, food_code, food_name);
 		jjimService.insertJjim(temp);
-		return "redirect:/SearchPage.jsp"; // 이부분이 문제
+		return "redirect:/food/SearchPage.do"; // 이부분이 문제
 	}
 	
 	@GetMapping("/deleteJjim.do")
 	public String deleteJjim(int jjim_code) {
 		System.out.println("찜코드!!!! -> " + jjim_code);
 		jjimService.deleteJjim(jjim_code);
-		return "redirect:/SearchPage.jsp";
+		return "redirect:/user/userinfo_jjim.do";
 	}
 	
 

@@ -25,7 +25,7 @@
 	</update> -->
 
 
-	<delete id="deletejjim" parameterType="int">
+	<delete id="deleteJjim" parameterType="int">
 		delete  from jjim
 		where   jjim_code = #{jjim_code}
 	</delete>

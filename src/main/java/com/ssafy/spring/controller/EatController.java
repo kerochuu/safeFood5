@@ -34,13 +34,13 @@ public class EatController {
 		Eat temp = new Eat(user_id, food_code, food_name);
 		System.out.println(user_id + "," + food_code + "," + food_name);
 		eatService.insertEat(temp);
-		return "redirect:/SearchPage.jsp";
+		return "redirect:/food/SearchPage.do";
 	}
 	
 	@GetMapping("/deleteEat.do")
 	public String deleteEat(int eat_code) {
 		eatService.deleteEat(eat_code);
-		return "redirect:/SearchPage.jsp";
+		return "redirect:/user/userinfo.do";
 	}
 
 }

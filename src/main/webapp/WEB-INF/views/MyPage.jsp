@@ -147,6 +147,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 								<div class="w3-container">
 									<h3 class="w3-opacity">
 										<b>${temp.eat_food_name}</b>
+										<a href="${pageContext.request.contextPath}/eat/deleteEat.do?eat_code=${temp.eat_code}"><button type="button" class="btn btn-primary" onclick="alert('삭제되었습니다!! ${temp.eat_code}');">삭제</button></a>
+				
 									</h3>
 									<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
 									<!--  <p>${food.material}</p>-->
