@@ -10,7 +10,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
-CREATE TABLE IF NOT EXISTS `safefood`.`jjim` (food
+CREATE TABLE IF NOT EXISTS `safefood`.`jjim` (
   `jjim_code` INT(11) NOT NULL AUTO_INCREMENT,
   `jjim_user_id` VARCHAR(40) NULL DEFAULT NULL,
   `jjim_food_code` INT(11) DEFAULT NULL,
