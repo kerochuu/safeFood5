@@ -21,11 +21,15 @@
 	</head>
 <body>
 	<jsp:include page="Header.jsp" />
-	<main>
-		<form action="${pageContext.request.contextPath}/food/list.do" method="post">
-	    	<h2 class="title-sub">제품정보</h2>
-	    <a href="${pageContext.request.contextPath}/eat/insertEat.do?user_id=${userId}&food_code=${food.food_code}&food_name=${food.food_name}&food_material=${food.food_material}"><button type="button" class="btn btn-primary" onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');">추가</button></a>　
-										
+	<main>		
+		<form method="post"  action="${pageContext.request.contextPath}/eat/insertEat.do">
+			<input type="hidden" name="user_id" value="${userId}"/>
+			<input type="hidden" name="food_code" value="${food.food_code}"/>
+			<input type="hidden" name="food_name" value="${food.food_name}"/>
+			<input type="hidden" name="food_material" value="${food.food_material}"/>
+			<input type="submit" class="btn btn-primary" 
+				onclick="alert('섭취목록 추가!! ${userId} ${food.food_name} ${food.food_material}');" value="추가"/>
+			<input type="submit" class="btn btn-info" onclick="alert('찜!! ${userId} ${food.food_name}');" formaction="${pageContext.request.contextPath}/jjim/insertJjim.do" value="찜"/>
 		</form>
 		<hr>
 		<div id="productInfo" class="contents">
@@ -114,7 +118,7 @@
 	        <div class="nutrition-info">
 	        	<%
 					String material = ((Food) request.getAttribute("food")).getFood_material();
-					String[] countrys = {"국산", "국내산", "호주", "미국", "독일", "말레이시아", "뉴질랜드", "중국", "캐나다", "에티오피아", "콜롬비아", "브라질"};
+					String[] countrys = {"국산", "국내산", "호주", "미국", "독일", "말레이시아", "뉴질랜드", "중국", "캐나다", "에티오피아", "콜롬비아", "브라질", "네덜란드", "아일랜드"};
 					HashMap<String, Integer> country_count = new HashMap<String, Integer>();
 					for(String country: countrys) {
 						int count = StringUtils.countOccurrencesOf(material, country); // material에 country가 몇 번 나오는지
@@ -270,7 +274,9 @@
                     	'${country_count["캐나다"]}',
                     	'${country_count["에티오피아"]}',
                     	'${country_count["콜롬비아"]}',
-                    	'${country_count["브라질"]}'
+                    	'${country_count["브라질"]}',
+                    	'${country_count["네덜란드"]}',
+                    	'${country_count["아일랜드"]}'
                     ],
                     backgroundColor: [
                         '#4dc9f6',
@@ -284,7 +290,9 @@
                         '#CC3D3D', // 빨간색
                         '#166a8f',
                         '#00a950',
-                        '#58595b'
+                        '#58595b',
+                        '#FFB2F5', // 연분홍
+                        '#CEFBC9' // 연초록
                     ],
                     label: 'Dataset 2'
                 }],
@@ -300,7 +308,9 @@
                     '캐나다',
                     '에티오피아',
                     '콜롬비아',
-                    '브라질'
+                    '브라질',
+                    '네덜란드',
+                    '아일랜드'
                 ]
             },
             options: {

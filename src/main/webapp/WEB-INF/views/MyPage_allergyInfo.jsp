@@ -189,7 +189,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	                				<table class="table">
 	                					<c:forEach items="${allergy_count}" var="c">
 		            						<tr>
-		            							<th>${c.key}</td>
+		            							<th>${c.key}</th>
 		            							<td>${c.value}</td>
 		            						</tr>
 		            					</c:forEach>
@@ -279,7 +279,7 @@ p {
                     '#537bc4',
                     '#acc236',
                     '#166a8f',
-                    '#00a950',
+                    //'#00a950',
                     '#58595b'
                 ],
                 label: 'Dataset 1'
