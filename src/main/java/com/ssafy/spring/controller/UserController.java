@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ssafy.spring.service.EatService;
 import com.ssafy.spring.service.FoodService;
 import com.ssafy.spring.service.UserService;
+import com.ssafy.spring.service.ValueService;
 import com.ssafy.spring.vo.User;
 
 
@@ -28,9 +29,14 @@ public class UserController {
 	UserService userService;
 	FoodService foodService;
 	EatService eatService;
+	ValueService valueService;
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	@Autowired
+	public void setValueService(ValueService valueService) {
+		this.valueService = valueService;
 	}
 	@Autowired
 	public void setFoodService(FoodService foodService) {
@@ -118,6 +124,7 @@ public class UserController {
 	@GetMapping("/userinfo.do")
 	public String serchById(HttpSession session, Model model) {
 		model.addAttribute("user", userService.getUser((String) session.getAttribute("userId")));
+		model.addAttribute("value", valueService.searchValue((String) session.getAttribute("userId")));
 		System.out.println("유저인포 잇리스트....");
 		model.addAttribute("eatList", eatService.selectSeqFood((String) session.getAttribute("userId")));	
 		return "MyPage";
@@ -126,6 +133,8 @@ public class UserController {
 	@GetMapping("/userinfo_jjim.do")
 	public String serchById2(HttpSession session, Model model) {
 		model.addAttribute("user", userService.getUser_jjim((String) session.getAttribute("userId")));
+		model.addAttribute("value", valueService.searchValue((String) session.getAttribute("userId")));
+		
 		return "MyPage_jjim";
 	}
 	

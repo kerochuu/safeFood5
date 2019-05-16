@@ -11,4 +11,6 @@ public interface JjimDAO {
 	
 	void deleteJjim(int jjim_code);
 	
+	Jjim selectJjim(int jjim_code);
+	
 }

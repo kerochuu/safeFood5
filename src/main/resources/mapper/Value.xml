@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="value">
+
+	
+	<!-- <select id="searchId" resultType="Notice" parameterType="String">
+		select Notice_id, Notice_pw, Notice_name, Notice_phone, Notice_address, Notice_jjimlist, Notice_allergy
+	</select> -->
+
+
+	<insert id="insertValue" parameterType="Value">
+		insert into value(value_user_id, value_calory, value_carbo, value_protein, value_fat, value_natrium )
+		values(#{value_user_id}, #{value_calory}, #{value_carbo}, #{value_protein}, #{value_fat}, #{value_natrium})
+	</insert>
+	
+	
+	<update id="updateValue" parameterType="Value">
+		update 	value
+		set		value_calory = value_calory + #{value_calory}, 
+				value_carbo = value_carbo + #{value_carbo},
+				value_protein = value_protein + #{value_protein},
+				value_fat = value_fat + #{value_fat},
+				value_natrium = value_natrium + #{value_natrium}
+		where 	value_user_id = #{value_user_id}
+		
+	
+	</update> 
+	
+	<select id="searchValue" resultType="Value" parameterType = "String">
+		select value_calory, value_carbo, value_protein, value_fat, value_natrium
+		 from value where value_user_id = #{value_user_id}
+	</select>
+	
+	<update id="minusValue" parameterType="Value">
+				update 	value
+		set		value_calory = value_calory - #{value_calory}, 
+				value_carbo = value_carbo - #{value_carbo},
+				value_protein = value_protein - #{value_protein},
+				value_fat = value_fat - #{value_fat},
+				value_natrium = value_natrium - #{value_natrium}
+		where 	value_user_id = #{value_user_id}
+	
+	</update>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

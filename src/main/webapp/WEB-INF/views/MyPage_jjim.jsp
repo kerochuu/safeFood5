@@ -83,31 +83,29 @@ html, body, h1, h2, h3, h4, h5, h6 {
 						<hr>
 
 						<p class="w3-large">
-							<b><i
-								class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>일일
-								섭취량</b>
+							<b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>일일 섭취량</b>
 						</p>
 						<p>탄수화물</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 90%">90%</div>
+								style="width: (${value.value_carbo})%">${value.value_carbo}</div>
 						</div>
 						<p>단백질</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 80%">
-								<div class="w3-center w3-text-white">80%</div>
+								style="width: ${value.value_protein}%">
+								<div class="w3-center w3-text-white">${value.value_protein}</div>
 							</div>
 						</div>
 						<p>지방</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 75%">75%</div>
+								style="width: ${value.value_fat}%">${value.value_fat}</div>
 						</div>
 						<p>나트륨</p>
 						<div class="w3-light-grey w3-round-xlarge w3-small">
 							<div class="w3-container w3-center w3-round-xlarge w3-teal"
-								style="width: 50%">50%</div>
+								style="width: ${value.value_natrium}%">${value.value_natrium}</div>
 						</div>
 						<br>
 
@@ -132,18 +130,22 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				<!-- End Left Column -->
 			</div>
 
-			<!-- Right Column -->
-			<div class="w3-twothird">
+
+			
+
+
+
+			<!-- Right qweqweqweqwe Column -->
+			<div class="w3-twothird" style="width: 45%;">
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">
 						<i
-							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>찜
+							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>섭취
 						목록
 					</h2>
-					<c:choose>
-						<c:when test="${not empty user.list}">
-							<c:forEach items="${user.list}" var="temp">
+
+						<c:forEach items="${user.list}" var="temp">
 								<div class="w3-container">
 									<h3 class="w3-opacity">
 										<b>${temp.jjim_food_name}</b>
@@ -155,12 +157,9 @@ html, body, h1, h2, h3, h4, h5, h6 {
 									<hr>
 								</div>
 							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							해당 내용이 존재하지 않습니다.
-						</c:otherwise>
-					</c:choose>
+
 				</div>
+
 				<!-- End Right Column -->
 				<div>
 					<button id="eat" type="submit"
@@ -171,15 +170,156 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				</div>
 			</div>
 
-			
+			<div class="w3-twothird" style="width: 20%;">
+				<div class="w3-container w3-card w3-white w3-margin-bottom">
+					<h2 class="w3-text-grey w3-padding-16">
+						<i
+							class="fa fa-arrow-circle-o-down fa-fw w3-margin-right w3-xxlarge w3-text-teal"
+							aria-hidden="true"></i>순위
 
-			<!-- End Grid -->
+
+					</h2>
+					<c:forEach items="${eatList}" var="el">
+						<div class="w3-container">
+							<h6 class="w3-opacity">
+								<a href = "${pageContext.request.contextPath}/food/detail.do?food_code=${el.eat_food_code}">
+								<b>${el.eat_food_name}</b></a>
+												
+
+							</h6>
+							<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
+							<!--  <p>${food.material}</p>-->
+							<hr />
+						</div>
+					</c:forEach>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- End qweqweqweqwe Grid -->
+
+		
 		</div>
 
 		<!-- End Page Container -->
 	</div>
 	</main>
 	<jsp:include page="Footer.jsp" />
+	
+	
+
+	<script type="text/javascript">
+      let eat = new Vue({
+         el : "#app",
+         data: {
+            eatList : [],
+            foodList : [],
+            date : '',
+            calData : [],
+            isGet : false,
+            
+            supportpereat : 0,
+            calory : 0,
+            carbo : 0,
+            protein : 0,
+            fat : 0,
+            sugar : 0,
+            natrium : 0,
+            chole : 0,
+            fattycid : 0,
+            transfat : 0,
+            userInfo : '',
+         },
+         methods: {
+            getUser() {
+                 axios.get("http://localhost:9080/basic/user/getuser")
+                  .then(response => {
+                     this.userInfo = response.data;
+                  })
+                  .catch()
+                  .finally();
+             },
+            getFoodList() { // 내가 섭취한 음식만 가져오기
+               axios.get("http://70.12.247.55:9080/basic/food/selectEatList.do?id=" + this.userInfo)
+                   .then(response => {
+                      this.foodList = response.data;
+                   })
+                   .catch()
+                   .finally();
+            },
+            getEatCal() { // 먹은 음식 성분 계산
+               console.log('getEatcal');
+               this.supportpereat = 0;
+                this.calory = 0;
+                this.carbo = 0;
+                this.protein = 0;
+                this.fat = 0;
+                this.sugar = 0;
+                this.natrium = 0;
+                this.chole = 0;
+                this.fattycid = 0;
+                this.transfat = 0;
+                
+               for(let i = 0; i < this.foodList.length; i++) {
+                  if(this.foodList[i].personeat.date === this.date) {
+                     this.supportpereat += this.foodList[i].supportpereat;
+                        this.calory += this.foodList[i].calory;
+                        this.carbo += this.foodList[i].carbo;
+                        this.protein += this.foodList[i].protein;
+                        this.fat += this.foodList[i].fat;
+                        this.sugar += this.foodList[i].sugar;
+                        this.natrium += this.foodList[i].natrium;
+                        this.chole += this.foodList[i].chole;
+                        this.fattycid += this.foodList[i].fattycid;
+                        this.transfat += this.foodList[i].transfat;
+                  };
+               };
+               this.isGet = true;
+               this.getGraph();
+            },
+            getGraph() {
+               google.charts.load('current', {'packages' : ['corechart']});
+             google.charts.setOnLoadCallback(drawChart);
+             
+             // Draw the chart and set the chart values
+             function drawChart() {
+                
+               let data = google.visualization.arrayToDataTable([
+               /* ['일일 제공량', ${food.supportpereat}], */
+               ['성분', '제공량'],
+               ['칼로리', eat.$data.supportpereat],
+               ['탄수화물', eat.$data.carbo],
+               ['단백질', eat.$data.protein],
+               ['지방', eat.$data.fat],
+               ['당류', eat.$data.sugar],
+               ['나트륨', eat.$data.natrium],
+               ['콜레스테롤', eat.$data.chole],
+               ['포화지방산', eat.$data.fattyacid],
+               ['트랜스지방', eat.$data.transfat],
+             ]); 
+               
+              let options = {
+                'title' : eat.$data.date +'일 섭취량',
+                /* 'width' : 100%,
+                'height' : 100%, */
+              };
+              let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+              chart.draw(data, options);
+             }
+            },
+         },
+         created() {
+            window.onload = () => {
+               this.getUser();
+             };
+         },
+      });
+
+   </script>
+</body>
 </body>
 <style>
 body {

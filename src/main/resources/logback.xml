@@ -13,6 +13,7 @@
  	<logger name="user" level="TRACE"/> 
  	<logger name="food" level="TRACE"/> 
  	<logger name="notice" level="TRACE"/> 
+ 	<logger name="value" level="TRACE"/> 
 	
 
 	<root level="INFO">
