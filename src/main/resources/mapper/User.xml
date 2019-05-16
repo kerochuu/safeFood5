@@ -82,7 +82,8 @@
 		<id column="eat_code" property="eat_code"/>
 		<result column="eat_user_id" property="eat_user_id"/>
 		<result column="eat_food_code" property="eat_food_code"/>		
-		<result column="eat_food_name" property="eat_food_name"/>		
+		<result column="eat_food_name" property="eat_food_name"/>
+		<result column="eat_food_material" property="eat_food_material"/>
 	</resultMap>
 	
 
@@ -94,7 +95,7 @@
 	
 	<select id="getUserWithEats" parameterType="String" resultMap="UserJoinResultMap">
 		select user_id, user_pw, user_name, user_phone, user_address, user_allergy,
-	 		  eat_code, eat_user_id, eat_food_code, eat_food_name
+	 		  eat_code, eat_user_id, eat_food_code, eat_food_name, eat_food_material
 		from  `user`
 		left outer join eat on (user_id = eat_user_id)
 		where user_id = #{user_id}

@@ -12,8 +12,8 @@
 
 
 	<insert id="insertEat" parameterType="Eat">
-		insert into eat( eat_user_id, eat_food_code, eat_food_name)
-		values(#{eat_user_id}, #{eat_food_code}, #{eat_food_name})
+		insert into eat( eat_user_id, eat_food_code, eat_food_name, eat_food_material )
+		values(#{eat_user_id}, #{eat_food_code}, #{eat_food_name}, #{eat_food_material})
 		
 	</insert>
 	

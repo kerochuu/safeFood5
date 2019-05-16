@@ -3,7 +3,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="java.util.HashMap"%>
+<%@ page import="org.springframework.util.StringUtils"%>
 <%@ page import="com.ssafy.spring.vo.User"%>
+<%@ page import="com.ssafy.spring.vo.Eat"%>
 
 <html>
 <head>
@@ -137,24 +140,45 @@ html, body, h1, h2, h3, h4, h5, h6 {
 
 				<div class="w3-container w3-card w3-white w3-margin-bottom">
 					<h2 class="w3-text-grey w3-padding-16">
-						<i
-							class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>찜
-						목록
+						<i class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>알레르기 통계
 					</h2>
 					<c:choose>
 						<c:when test="${not empty user.list}">
+							<%
+								String[] allergys = {"새우", "대두", "우유"};
+								HashMap<String, Integer> allergy_count = new HashMap<String, Integer>();
+								//System.out.println(country_count.toString());
+								pageContext.setAttribute("allergy_count", allergy_count);
+							%>
 							<c:forEach items="${user.list}" var="temp">
 								<div class="w3-container">
-									<h3 class="w3-opacity">
-										<b>${temp.jjim_food_name}</b>
-										<a href="${pageContext.request.contextPath}/jjim/deleteJjim.do?jjim_code=${temp.jjim_code}"><button type="button" class="btn btn-primary" onclick="alert('삭제되었습니다!! ${temp.jjim_code}');">삭제</button></a>
-				
-									</h3>
-									<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>
-									<!--  <p>${food.material}</p>-->
+									<%
+										String material = ((Eat) request.getAttribute("temp")).getEat_food_material();
+										for(String allergy: allergys) {
+											int count = StringUtils.countOccurrencesOf(material, allergy); // material에 allergy가 몇 번 나오는지
+											if(count > 0)
+												allergy_count.put(allergy, count);
+										}
+									%>
 									<hr>
 								</div>
 							</c:forEach>
+							
+							<div class="nutrition-info">
+	            				<div class="info-block">
+	                				<canvas id="chart-area" width="400" height="400" class="chartjs-render-monitor" style="display: block; width: 372px; height: 186px;"></canvas>
+	            				</div>
+	            				<div class="info-block">
+	                				<table class="table">
+	                					<c:forEach items="${allergy_count}" var="c">
+		            						<tr>
+		            							<th>${c.key}</td>
+		            							<td>${c.value}</td>
+		            						</tr>
+		            					</c:forEach>
+	                				</table>
+	            				</div>
+	        				</div>
 						</c:when>
 						<c:otherwise>
 							해당 내용이 존재하지 않습니다.
@@ -166,7 +190,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					<button id="eat" type="submit"
 						class="form-control btn btn-block btn-primary">섭취목록</button>
 					<button id="jjim" type="submit"
-						class="form-control btn btn-block btn-primary">알레르기정보</button>
+						class="form-control btn btn-block btn-primary">찜목록</button>
 					
 				</div>
 			</div>
@@ -216,6 +240,59 @@ p {
 	margin: 3% 0 0 9.5%;
 }
 </style>
+
+<script>
+    var config = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [
+                	'${allergy_count["새우"]}',
+                	'${allergy_count["대두"]}',
+                	'${allergy_count["우유"]}'
+                ],
+                backgroundColor: [
+                    '#4dc9f6',
+                    '#f67019',
+                    '#f53794',
+                    '#537bc4',
+                    '#acc236',
+                    '#166a8f',
+                    '#00a950',
+                    '#58595b'
+                ],
+                label: 'Dataset 1'
+            }],
+            labels: [
+                '새우',
+                '대두',
+                '우유'
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: '섭취 식품 알레르기별 통계'
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    };
+
+    window.onload = function() {
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myDoughnut = new Chart(ctx, config);
+    };
+
+    var colorNames = Object.keys(window.chartColors);
+</script>
+
 <script>
 $("#exit").click(function(){
 	 location.href = "main.do?action=member&method=deleteMember";

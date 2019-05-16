@@ -121,6 +121,12 @@ public class UserController {
 		return "MyPage_jjim";
 	}
 	
+	@GetMapping("/userinfo_allergyInfo.do")
+	public String serchById3(HttpSession session, Model model) {
+		model.addAttribute("user", userService.getUser((String) session.getAttribute("userId")));
+		return "MyPage_allergyInfo";
+	}
+	
 	
 	
 	@GetMapping("/find.do")

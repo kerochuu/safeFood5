@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `safefood`.`eat` (
   `eat_user_id` VARCHAR(40) NULL DEFAULT NULL,
   `eat_food_code` INT(11) DEFAULT NULL,
   `eat_food_name` VARCHAR(200) NULL DEFAULT NULL,
+  `eat_food_material` VARCHAR(2000) NULL DEFAULT NULL,
   
   PRIMARY KEY (`eat_code`))
 ENGINE = InnoDB
