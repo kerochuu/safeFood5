@@ -146,7 +146,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					<c:choose>
 						<c:when test="${not empty user.list}">
 							<%
-								String[] allergys = {"새우", "대두", "우유"};
+								String[] allergys = {"새우", "대두", "우유", "땅콩", "돼지고기", "계란", "소고기", "팜유"};
 								HashMap<String, Integer> allergy_count = new HashMap<String, Integer>();
 								//System.out.println(country_count.toString());
 								
@@ -266,7 +266,12 @@ p {
                 data: [
                 	'${allergy_count["새우"]}',
                 	'${allergy_count["대두"]}',
-                	'${allergy_count["우유"]}'
+                	'${allergy_count["우유"]}',
+                	'${allergy_count["땅콩"]}',
+                	'${allergy_count["돼지고기"]}',
+                	'${allergy_count["계란"]}',
+                	'${allergy_count["소고기"]}',
+                	'${allergy_count["팜유"]}'
                 ],
                 backgroundColor: [
                     '#4dc9f6',
@@ -283,7 +288,12 @@ p {
             labels: [
                 '새우',
                 '대두',
-                '우유'
+                '우유',
+                '땅콩',
+                '돼지고기',
+                '계란',
+                '소고기',
+                '팜유'
             ]
         },
         options: {
@@ -324,6 +334,11 @@ $("#eat")
 .click(
 		function() {
 			location.href = "${pageContext.request.contextPath}/user/userinfo.do";
+		});
+$("#jjim")
+.click(
+		function() {
+			location.href = "${pageContext.request.contextPath}/user/userinfo_jjim.do";
 		});
 
 </script>
