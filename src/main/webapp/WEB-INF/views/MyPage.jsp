@@ -193,7 +193,9 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					<c:forEach items="${eatList}" var="el">
 						<div class="w3-container">
 							<h6 class="w3-opacity">
-								<b>${el.eat_food_name}</b>
+								<a href = "${pageContext.request.contextPath}/food/detail.do?food_code=${el.eat_food_code}">
+								<b>${el.eat_food_name}</b></a>
+												
 
 							</h6>
 							<%-- <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>${food.eatDay}</h6> --%>

@@ -18,11 +18,12 @@
 	
 	<resultMap type="Eat" id="SeqResultMap">
 		<id column="eat_food_name" property="eat_food_name"/>
+		<id column="eat_food_code" property="eat_food_code"/>
 	</resultMap>
 	
 	<select id="selectSeqFood" resultMap="SeqResultMap" parameterType="String">
 		
-		select eat.eat_food_name 
+		select eat.eat_food_name, eat.eat_food_code 
 		from  eat
         left outer join food on (eat.eat_food_code = food.food_code)
         where eat.eat_user_id = #{user_id}
