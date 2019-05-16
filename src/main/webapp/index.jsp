@@ -80,6 +80,8 @@ form {
 .bg {
 	background:
 		url(${pageContext.request.contextPath}/resources/img/login-background.jpg);
+	background-size: 90%;
+	background-repeat: no-repeat;
 	height: 800px;
 	position: relative;
 	z-index: -1;
