@@ -5,34 +5,31 @@
 <mapper namespace="eat">
 
 
-	<!-- <select id="searchId" resultType="Notice" parameterType="String">
-		select Notice_id, Notice_pw, Notice_name, Notice_phone, Notice_address, Notice_eatlist, Notice_allergy
-	</select> -->
-
-
-
 	<insert id="insertEat" parameterType="Eat">
 		insert into eat( eat_user_id, eat_food_code, eat_food_name, eat_food_material )
 		values(#{eat_user_id}, #{eat_food_code}, #{eat_food_name}, #{eat_food_material})
 		
 	</insert>
 	
-<!-- 	
-	<update id="updateEat" parameterType="Eat">
-		update 	eat
-		set 	eat_user_code = #{eat_user_code}
-				notice_content = #{notice_content}
-				notice_date = #{notice_date}
-		where 	Notice_code = #{notice_code}
-	</update> -->
-
-
 	<delete id="deleteEat" parameterType="int">
 		delete  from eat
 		where   eat_code = #{eat_code}
 	</delete>
-
 	
+	<resultMap type="Eat" id="SeqResultMap">
+		<id column="eat_food_name" property="eat_food_name"/>
+	</resultMap>
+	
+	<select id="selectSeqFood" resultMap="SeqResultMap" parameterType="String">
+		
+		select eat.eat_food_name 
+		from  eat
+        left outer join food on (eat.eat_food_code = food.food_code)
+        where eat.eat_user_id = #{user_id}
+        group by eat.eat_food_code
+        order by count(eat.eat_food_code) desc
+
+	</select>
 	
 </mapper>
 

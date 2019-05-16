@@ -26,5 +26,10 @@ public class EatDAOImpl implements EatDAO {
 		session.delete("eat.deleteEat", eat_code);
 	}
 
+	@Override
+	public List<Eat> selectSeqFood(String eat_user_id) {
+		return session.selectList("eat.selectSeqFood", eat_user_id);
+	}
+
 
 }
