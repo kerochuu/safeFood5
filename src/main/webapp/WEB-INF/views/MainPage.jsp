@@ -37,7 +37,7 @@
 	        </div>
 	        
 	        <div align="center">
-	        	<h1 class="safe-text" style="color: rgb(60, 144, 226);">베스트 식품</h1>
+	        	<h1 class="safe-text" style="color: rgb(60, 144, 226);">베스트 조회 식품</h1>
 	        	<table>
 	        		<tr>
 	        			<th>식품명</th> <th>제조사</th> <th>조회수</th>
